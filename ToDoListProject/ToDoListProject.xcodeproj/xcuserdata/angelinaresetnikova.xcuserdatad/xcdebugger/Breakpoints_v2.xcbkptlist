@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4A20248D-52E5-463A-BBD7-9543DC97205F"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "27394A95-A437-4853-848D-84696B5F6B2F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/FileCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "readJSON(path:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "940F5DA9-DC8E-42C8-80F7-7E4133CF6B0E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/ToDoItem.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "parse(json:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "940F5DA9-DC8E-42C8-80F7-7E4133CF6B0E - 541e15226b3f5505"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ToDoListProject.TodoItem.parse(json: Any) -&gt; Swift.Optional&lt;ToDoListProject.TodoItem&gt;"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/sirius/ToDoListProject/ToDoListProject/ToDoItem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "484">
+               </Location>
+               <Location
+                  uuid = "940F5DA9-DC8E-42C8-80F7-7E4133CF6B0E - 541e15226b3f5505"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static ToDoListProject.TodoItem.parse(json: Any) -&gt; Swift.Optional&lt;ToDoListProject.TodoItem&gt;"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/sirius/ToDoListProject/ToDoListProject/ToDoItem.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "596">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
