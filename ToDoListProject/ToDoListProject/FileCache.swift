@@ -44,7 +44,7 @@ class FileCache {
         for item in collectionOfToDoItemsJson {
             let optionalToDoItem = TodoItem.parse(json: item)
             if let toDoItem = optionalToDoItem {
-                collectionOfToDoItems.append(toDoItem)
+                addingNewItem(item: toDoItem)
             }
         }
         
@@ -61,7 +61,7 @@ class FileCache {
             for row in rows[1...rows.count - 2] {
                 let itemtodo = TodoItem.parse(csv: row)
                 if let itemtodo {
-                    collectionOfToDoItems.append(itemtodo)
+                    addingNewItem(item: itemtodo)
                 }
             }
         } catch {
