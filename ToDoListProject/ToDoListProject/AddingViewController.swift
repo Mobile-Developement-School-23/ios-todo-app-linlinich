@@ -115,7 +115,6 @@ final class AddingViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        readFromFile(filename: "filename")
         view.backgroundColor = UIColor(asset: Asset.Colors.backPrimary)
         setupNavBar()
         setapStackAndScrollView()
@@ -189,6 +188,7 @@ final class AddingViewController: UIViewController {
                 item = TodoItem(text: text, importance: importance, deadline: deadline)
             }
             fileCache.addingNewItem(item: item)
+            print(item)
             fileCache.writeJSON(path: "filename")
             navigationItem.rightBarButtonItem?.isEnabled = false
         }
@@ -211,9 +211,10 @@ final class AddingViewController: UIViewController {
         navigationItem.rightBarButtonItem?.isEnabled = false
         deleteButton.setTitleColor(UIColor(asset: Asset.Colors.labelTertiary), for: .normal)
         
-        if let id = todoItem?.id {
+        if let id = readFromFile(filename: "filename")?.id {
             fileCache.deleteItem(id: id)
-            fileCache.writeJSON(path: "privet")
+            print(fileCache.collectionOfToDoItems)
+            fileCache.writeJSON(path: "filename")
         }
         configure()
     }

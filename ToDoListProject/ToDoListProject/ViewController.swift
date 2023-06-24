@@ -89,16 +89,12 @@ final class ToDoItemsViewController: UIViewController {
     }
     
     private func setupStackView() {
-//        stackView = UIStackView(arrangedSubviews: [myTasksLabel, countOfDoneLabel, toDoItemsTableView])
-//        stackView.spacing = 10
-//        stackView.axis = .vertical
         
         scrollView.addSubview(myTasksLabel)
         scrollView.addSubview(countOfDoneLabel)
         scrollView.addSubview(toDoItemsTableView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-       // stackView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func makeConstraints() {
