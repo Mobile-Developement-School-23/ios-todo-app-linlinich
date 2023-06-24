@@ -1,16 +1,18 @@
 import Foundation
 
 class FileCache {
-    private var collectionOfToDoItems: Array<TodoItem> = []
+    private (set) var collectionOfToDoItems: Array<TodoItem> = []
     
     init(collectionOfToDoItems: [TodoItem]) {
         self.collectionOfToDoItems = collectionOfToDoItems
     }
     
     func readJSON(path: String) {
+        collectionOfToDoItems = []
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsDirectory.appendingPathComponent("\(path).json")
+        print(fileURL)
 
         var file: Data?
         do {
@@ -36,7 +38,7 @@ class FileCache {
             print("Ошибка при парсинге JSON")
         }
         
-        guard let collectionOfToDoItemsJson = dict["toDoItem"] as? [[String: Any]] else {
+        guard let collectionOfToDoItemsJson = dict["toDoItems"] as? [[String: Any]] else {
             print("Ошибка! в файле нет ToDoItem")
             return
         }
@@ -51,6 +53,7 @@ class FileCache {
     }
     
     func readCSV(path: String) {
+        collectionOfToDoItems = []
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsDirectory.appendingPathComponent("\(path).csv")
@@ -70,6 +73,7 @@ class FileCache {
     }
     
     func writeCSV(path: String?) {
+        collectionOfToDoItems = []
         var savePath: String
         if let str = path {
             savePath = str
@@ -96,6 +100,7 @@ class FileCache {
     }
 
     func writeJSON(path: String?) {
+        collectionOfToDoItems = []
         var savePath: String
         if let str = path {
             savePath = str
