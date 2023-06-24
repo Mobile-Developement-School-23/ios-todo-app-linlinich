@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "DEC72C08-D212-4977-85A4-A7ECD7EB815D"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4DAB8D37-A6C5-40FD-A02E-1C9352247777"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/AddingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "didChangeDate()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "4DAB8D37-A6C5-40FD-A02E-1C9352247777 - 2a3bb6ed64e755ca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoListProject.AddingViewController.didTapDeleteButton() -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/AddingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "4DAB8D37-A6C5-40FD-A02E-1C9352247777 - eacc50d8a7e167f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoListProject.AddingViewController.didChangeDate() -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/AddingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE087B79-5975-4461-86E4-193F1131C123"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/AddingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "configure()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "BE087B79-5975-4461-86E4-193F1131C123 - d0f93e7773fab7c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoListProject.AddingViewController.configure() -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/AddingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "408">
+               </Location>
+               <Location
+                  uuid = "BE087B79-5975-4461-86E4-193F1131C123 - d0f93e7773fab7c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoListProject.AddingViewController.configure() -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/AddingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F767F54A-DFD7-41FD-BAF6-910CFD5BF477"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/AddingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "readFromFile(filename:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13077AD1-E87C-486A-BAD3-995F6669E401"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/AddingViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "readFromFile(filename:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "13077AD1-E87C-486A-BAD3-995F6669E401 - 3ae6d1335950febd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoListProject.AddingViewController.readFromFile(filename: Swift.String) -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/AddingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "13077AD1-E87C-486A-BAD3-995F6669E401 - 3ae6d1335950febd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToDoListProject.AddingViewController.readFromFile(filename: Swift.String) -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/AddingViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "160">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
