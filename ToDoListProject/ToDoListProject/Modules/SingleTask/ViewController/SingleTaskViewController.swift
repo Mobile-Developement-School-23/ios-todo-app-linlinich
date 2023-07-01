@@ -19,11 +19,10 @@ final class SingleTaskViewController: UIViewController {
     var informationOutput: InInformationTaskViewOutput? = InformationTaskView()
     private let model = ToDoItemsModel()
     
-    var todoItem: TodoItem? = nil
+    var todoItem: TodoItem?
     
     func configure(item: TodoItem?) {
         if let item {
-            let itemId = item.id
             listItem.text = item.text
             listItem.textColor = UIColor(asset: Asset.Colors.labelPrimary)
 
@@ -140,8 +139,14 @@ final class SingleTaskViewController: UIViewController {
     }
     
     private func setupKeyboardSettings() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: self.view.window)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: self.view.window)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: self.view.window)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: self.view.window)
     }
     
     private func removeKeyboardSettings() {
@@ -206,7 +211,7 @@ final class SingleTaskViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -236,17 +241,24 @@ final class SingleTaskViewController: UIViewController {
     
     @objc
     func didTapSaveButton() {
-        var importance = informationTaskView.returnImportance()
+        let importance = informationTaskView.returnImportance()
         if let text = listItem.text {
-            var deadline: Date? = nil
+            var deadline: Date?
             if informationTaskView.switchControl.isOn == true {
                 deadline = calendarView.date
             }
             let item: TodoItem
             if let inputTodoItem = todoItem {
-                item = TodoItem(id: inputTodoItem.id, text: text, importance: importance, deadline: deadline, dateOfCreation: inputTodoItem.dateOfCreation, dateOfChange: .now)
+                item = TodoItem(id: inputTodoItem.id,
+                                text: text,
+                                importance: importance,
+                                deadline: deadline,
+                                dateOfCreation: inputTodoItem.dateOfCreation,
+                                dateOfChange: .now)
             } else {
-                item = TodoItem(text: text, importance: importance, deadline: deadline)
+                item = TodoItem(text: text,
+                                importance: importance,
+                                deadline: deadline)
             }
             model.addingItem(item: item)
             output?.reloadData()

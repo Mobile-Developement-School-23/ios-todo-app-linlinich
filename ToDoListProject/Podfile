@@ -6,6 +6,7 @@ target 'ToDoListProject' do
   use_frameworks!
 
   pod 'SwiftGen'
+  pod 'SwiftLint'
 
   # Pods for ToDoListProject
 

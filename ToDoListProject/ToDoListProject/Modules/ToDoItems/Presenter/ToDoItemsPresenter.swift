@@ -55,7 +55,6 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
                 item = toDoItems[row]
                 item.didDone = !toDoItems[row].didDone
             case .undone:
-                print(row)
                 item = toDoItems.filter { $0.didDone == false }[row]
                 item.didDone = true
             }

@@ -1,5 +1,3 @@
-
-
 import UIKit
 import Combine
 
@@ -92,7 +90,7 @@ final class ToDoItemsViewController: UIViewController {
             addingButton.heightAnchor.constraint(equalToConstant: 44),
             addingButton.widthAnchor.constraint(equalToConstant: 44),
             addingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -54),
+            addingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -54)
         ])
     }
 }
@@ -129,12 +127,12 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
                 cell.position = .solo
             } else if indexPath.row == 0 {
                 cell.position = .first
-            } else if (indexPath.row == cellsCount) {
+            } else if indexPath.row == cellsCount {
                 cell.position = .last
             } else {
                 cell.position = .middle
             }
-            if (indexPath.row == cellsCount) {
+            if indexPath.row == cellsCount {
                 cell.configureNewCell()
             } else {
                 if let data = output?.displayToDoItems(row: indexPath.row, type: typeOfTableView) {
@@ -184,8 +182,7 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.row != output?.getCellsCount(type: self.typeOfTableView) {
-            let delete = UIContextualAction(style: .destructive, title: nil) {
-                (_, _, complitionHand) in
+            let delete = UIContextualAction(style: .destructive, title: nil) { (_, _, _) in
                 self.output?.deleteItem(type: self.typeOfTableView, row: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.reloadData()
@@ -193,8 +190,7 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
             delete.image = UIImage(systemName: "trash.fill")
             delete.backgroundColor = UIColor(asset: Asset.Colors.red)
             
-            let info = UIContextualAction(style: .normal, title: nil) {
-                (_, _, complitionHand) in
+            let info = UIContextualAction(style: .normal, title: nil) { (_, _, complitionHand) in
                 if let data = self.output?.displayToDoItems(row: indexPath.row, type: self.typeOfTableView) {
                     let formatter = DateFormatter()
                     if let localeID = Locale.preferredLanguages.first {
@@ -202,15 +198,15 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
                     }
                     formatter.dateFormat = "d MMMM yyyy"
                     var message: String = "Текст задачи: \(data.text)\n"
-                    message = message + "Дата создания: \(formatter.string(from: data.dateOfCreation))"
+                    message += "Дата создания: \(formatter.string(from: data.dateOfCreation))"
                     if data.didDone == true {
-                        message = message + "\nВажность задачи: \(data.importance.rawValue)"
+                        message += "\nВажность задачи: \(data.importance.rawValue)"
                         if let deadline = data.deadline {
-                            message = message + "\nДедлайн: \(formatter.string(from: deadline))"
+                            message += "\nДедлайн: \(formatter.string(from: deadline))"
                         }
                     }
                     if let dateOfChange = data.dateOfChange {
-                        message = message + "\nДата последнего изменения: \(formatter.string(from: dateOfChange))"
+                        message += "\nДата последнего изменения: \(formatter.string(from: dateOfChange))"
                     }
                     let alertViewController = UIAlertController(title: "Информация о задаче", message: message, preferredStyle: .alert)
                     alertViewController.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
@@ -230,10 +226,8 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.row != output?.getCellsCount(type: typeOfTableView)
-            && ((output?.checkIsDone(type: typeOfTableView, row: indexPath.row)) != true)
-        {
-            let checkmark = UIContextualAction(style: .destructive, title: nil) {
-                (_, _, complitionHand) in
+            && ((output?.checkIsDone(type: typeOfTableView, row: indexPath.row)) != true) {
+            let checkmark = UIContextualAction(style: .destructive, title: nil) { (_, _, _) in
                 self.didTapDoneButton(indexPath: indexPath)
             }
             checkmark.image = UIImage(systemName: "checkmark.circle.fill")
