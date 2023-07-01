@@ -5,7 +5,7 @@ struct TodoItem {
     let text: String
     let importance: ImportanceOfTask
     let deadline: Date?
-    let didDone: Bool
+    var didDone: Bool
     let dateOfCreation: Date
     let dateOfChange: Date?
     
@@ -62,7 +62,10 @@ extension TodoItem {
         }
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
+        if let localeID = Locale.preferredLanguages.first {
+            formatter.locale = Locale(identifier: localeID)
+        }
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
         
         guard let dateOfCreation = formatter.date(from: dateOfCreationJson) else { return nil }
         
@@ -91,7 +94,10 @@ extension TodoItem {
     
     var json: Any {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
+        if let localeID = Locale.preferredLanguages.first {
+            formatter.locale = Locale(identifier: localeID)
+        }
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
         
         var json: [String: Any] = [
             CodingKeys.id.rawValue: id,
@@ -118,7 +124,10 @@ extension TodoItem {
     static func parse(csv: String) -> TodoItem? {
         var mas = csv.components(separatedBy: ",").map{String($0)}
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
+        if let localeID = Locale.preferredLanguages.first {
+            formatter.locale = Locale(identifier: localeID)
+        }
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
         guard let didDone = Bool(mas[4]) else { return nil }
         guard let dateOfCreation = formatter.date(from: mas[5]) else { return nil }
         if mas.count == 7, mas[0] != "" , mas[1] != "", mas[5] != "" {
@@ -162,7 +171,10 @@ extension TodoItem {
     
     var csv: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
+        if let localeID = Locale.preferredLanguages.first {
+            formatter.locale = Locale(identifier: localeID)
+        }
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
         
         var mas: Array<String> = []
         mas += [id, text, importance.rawValue]

@@ -8,28 +8,33 @@
 import Foundation
 import UIKit
 
-final class AddingViewController: UIViewController {
+protocol SingleTaskViewControllerOutput: AnyObject {
+    func reloadData()
+}
+
+
+final class SingleTaskViewController: UIViewController {
     
-    private var fileCache = FileCache(collectionOfToDoItems: [])
+    var output: SingleTaskViewControllerOutput?
+    var informationOutput: InInformationTaskViewOutput? = InformationTaskView()
+    private let model = ToDoItemsModel()
     
-    private var todoItem : TodoItem?
-    private func readFromFile(filename: String) -> TodoItem? {
-        fileCache.readJSON(path: filename)
-        if fileCache.collectionOfToDoItems.count > 0 {
-            return fileCache.collectionOfToDoItems[0]
-        } else {
-            return nil
-        }
-    }
+    var todoItem: TodoItem? = nil
     
-    func configure() {
-        if let item = readFromFile(filename: "filename") {
+    func configure(item: TodoItem?) {
+        if let item {
             let itemId = item.id
             listItem.text = item.text
             listItem.textColor = UIColor(asset: Asset.Colors.labelPrimary)
 
             informationTaskView.setImportance(importanceCheck: item.importance)
             informationTaskView.setDate(newDate: item.deadline ?? .now)
+            
+            if let deadline = item.deadline {
+                informationTaskView.switchControl.isOn = true
+                calendarView.date = deadline
+                informationTaskView.switchControlChangedValue()
+            }
             
             navigationItem.rightBarButtonItem?.isEnabled = true
         } else {
@@ -65,6 +70,10 @@ final class AddingViewController: UIViewController {
         calendar.date = todoItem?.deadline ?? tommorowDate
         calendar.addTarget(self, action: #selector(didChangeDate), for: .valueChanged)
         calendar.translatesAutoresizingMaskIntoConstraints = false
+        if let localeID = Locale.preferredLanguages.first {
+            calendar.locale = Locale(identifier: localeID)
+        }
+        calendar.minimumDate = .now
         return calendar
     }()
     
@@ -115,15 +124,63 @@ final class AddingViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = UIColor(asset: Asset.Colors.backPrimary)
         setupNavBar()
         setapStackAndScrollView()
-        configure()
+        configure(item: todoItem)
         makeConstraints()
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
+        setupKeyboardSettings()
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        removeKeyboardSettings()
+    }
+    
+    private func setupKeyboardSettings() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: self.view.window)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: self.view.window)
+    }
+    
+    private func removeKeyboardSettings() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: self.view.window)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            view.frame.size.height -= keyboardSize.height
+        }
+    }
+    @objc func keyboardWillHide(sender: NSNotification) {
+        if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            view.frame.size.height += keyboardSize.height
+            view.endEditing(true)
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: { _ in
+            if UIDevice.current.orientation.isLandscape {
+                self.deleteButton.isHidden = true
+                self.stackViewWithInformation.isHidden = true
+                self.listItem.heightAnchor.constraint(greaterThanOrEqualToConstant: 330).isActive = true
+                self.listItem.heightAnchor.constraint(equalToConstant: 330).isActive = false
+            } else {
+                self.deleteButton.isHidden = false
+                self.stackViewWithInformation.isHidden = false
+                self.listItem.heightAnchor.constraint(equalToConstant: 120).isActive = true
+                self.listItem.heightAnchor.constraint(equalToConstant: 120).isActive = false
+               // self.myConstraints()
+            }
+
+        }, completion: nil)
+    }
+
     
     private func setupNavBar() {
         navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 56)
@@ -146,10 +203,10 @@ final class AddingViewController: UIViewController {
     
     private func makeConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
         NSLayoutConstraint.activate([
@@ -162,7 +219,8 @@ final class AddingViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             calendarView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            calendarView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16)
+            calendarView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            separator.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16)
         ])
     }
     
@@ -180,22 +238,28 @@ final class AddingViewController: UIViewController {
     func didTapSaveButton() {
         var importance = informationTaskView.returnImportance()
         if let text = listItem.text {
-            let deadline: Date? = calendarView.date
+            var deadline: Date? = nil
+            if informationTaskView.switchControl.isOn == true {
+                deadline = calendarView.date
+            }
             let item: TodoItem
-            if let id = todoItem?.id {
-                item = TodoItem(id: id, text: text, importance: importance, deadline: deadline)
+            if let inputTodoItem = todoItem {
+                item = TodoItem(id: inputTodoItem.id, text: text, importance: importance, deadline: deadline, dateOfCreation: inputTodoItem.dateOfCreation, dateOfChange: .now)
             } else {
                 item = TodoItem(text: text, importance: importance, deadline: deadline)
             }
-            fileCache.addingNewItem(item: item)
-            print(item)
-            fileCache.writeJSON(path: "filename")
-            navigationItem.rightBarButtonItem?.isEnabled = false
+            model.addingItem(item: item)
+            output?.reloadData()
+            self.dismiss(animated: true)
         }
     }
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+        if listItem.text.count < 1 {
+            listItem.text = "Что надо сделать?"
+            listItem.textColor = UIColor(asset: Asset.Colors.labelTertiary)
+        }
     }
     
     @objc
@@ -205,22 +269,15 @@ final class AddingViewController: UIViewController {
     
     @objc
     func didTapDeleteButton() {
-        listItem.text = "Что надо сделать?"
-        listItem.textColor = UIColor(asset: Asset.Colors.labelTertiary)
-        listItem.endEditing(true)
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        deleteButton.setTitleColor(UIColor(asset: Asset.Colors.labelTertiary), for: .normal)
-        
-        if let id = readFromFile(filename: "filename")?.id {
-            fileCache.deleteItem(id: id)
-            print(fileCache.collectionOfToDoItems)
-            fileCache.writeJSON(path: "filename")
+        if let id = todoItem?.id {
+            model.deleteItem(id: id)
+            output?.reloadData()
         }
-        configure()
+        self.dismiss(animated: true)
     }
 }
 
-extension AddingViewController: UITextViewDelegate {
+extension SingleTaskViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor(asset: Asset.Colors.labelTertiary) {
             textView.text = nil
@@ -234,7 +291,8 @@ extension AddingViewController: UITextViewDelegate {
     }
 }
 
-extension AddingViewController: InInformationTaskViewDelegate {
+extension SingleTaskViewController: InInformationTaskViewDelegate {
+    
     func closeCalendar() {
         self.calendarView.alpha = 1
         separator.isHidden = true
@@ -262,7 +320,7 @@ extension AddingViewController: InInformationTaskViewDelegate {
     }
 }
 
-extension AddingViewController: UICalendarSelectionSingleDateDelegate & UICalendarViewDelegate {
+extension SingleTaskViewController: UICalendarSelectionSingleDateDelegate & UICalendarViewDelegate {
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         
     }

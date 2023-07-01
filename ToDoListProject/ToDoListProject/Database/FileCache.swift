@@ -1,9 +1,14 @@
 import Foundation
 
-class FileCache {
+protocol FileCacheProtocol {
+    func readJSON(path: String)
+}
+
+class FileCache: FileCacheProtocol {
+    static let shared = FileCache()
     private (set) var collectionOfToDoItems: Array<TodoItem> = []
     
-    init(collectionOfToDoItems: [TodoItem]) {
+    init(collectionOfToDoItems: [TodoItem] = [TodoItem]()) {
         self.collectionOfToDoItems = collectionOfToDoItems
     }
     
@@ -11,7 +16,6 @@ class FileCache {
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsDirectory.appendingPathComponent("\(path).json")
-        print(fileURL)
 
         var file: Data?
         do {
@@ -37,7 +41,7 @@ class FileCache {
             print("Ошибка при парсинге JSON")
         }
         
-        guard let collectionOfToDoItemsJson = dict["toDoItem"] as? [[String: Any]] else {
+        guard let collectionOfToDoItemsJson = dict["toDoItems"] as? [[String: Any]] else {
             print("Ошибка! в файле нет ToDoItem")
             return
         }
@@ -48,6 +52,7 @@ class FileCache {
                 addingNewItem(item: toDoItem)
             }
         }
+        
         
     }
     
@@ -117,7 +122,7 @@ class FileCache {
         }
 
         do {
-            let dict: [String:Any] = ["toDoItem": array]
+            let dict: [String:Any] = ["toDoItems": array]
             let data = try JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
             try data.write(to: fileURL)
         } catch {

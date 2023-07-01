@@ -38,6 +38,7 @@ internal enum Asset {
     internal static let navBarBlur = ColorAsset(name: "NavBarBlur")
     internal static let overlay = ColorAsset(name: "Overlay")
     internal static let red = ColorAsset(name: "Red")
+    internal static let redBackground = ColorAsset(name: "RedBackground")
     internal static let separator = ColorAsset(name: "Separator")
     internal static let shadow = ColorAsset(name: "Shadow")
     internal static let `while` = ColorAsset(name: "While")

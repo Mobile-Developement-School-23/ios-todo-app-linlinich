@@ -16,6 +16,10 @@ protocol InInformationTaskViewDelegate: AnyObject {
     func closeCalendar()
 }
 
+protocol InInformationTaskViewOutput: AnyObject {
+    func didSwitchIsOn() -> Bool
+}
+
 class InformationTaskView: UIView {
     private var toDoItem: TodoItem?
     private weak var delegate: InInformationTaskViewDelegate?
@@ -41,7 +45,10 @@ class InformationTaskView: UIView {
     
      func ifConfigure() {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMMM yyyy"
+         if let localeID = Locale.preferredLanguages.first {
+             formatter.locale = Locale(identifier: localeID)
+         }
+        formatter.dateFormat = "d MMMM yyyy"
 
         if let dateFormat = toDoItem?.deadline {
             date.setTitle(formatter.string(from: dateFormat), for: .normal)
@@ -131,7 +138,7 @@ class InformationTaskView: UIView {
         
         NSLayoutConstraint.activate([
             separator.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            separator.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            separator.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             separator.topAnchor.constraint(equalTo: importance.bottomAnchor, constant: 17)
         ])
         
@@ -185,8 +192,10 @@ class InformationTaskView: UIView {
             return .unimportant
         } else if importanceSegmentControl.selectedSegmentIndex == 1 {
             return .usual
-        } else {
+        } else if importanceSegmentControl.selectedSegmentIndex == 2 {
             return .important
+        } else {
+            return .usual
         }
     }
     
@@ -203,11 +212,20 @@ class InformationTaskView: UIView {
     
     func setDate(newDate: Date) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMMM yyyy"
+        if let localeID = Locale.preferredLanguages.first {
+            formatter.locale = Locale(identifier: localeID)
+        }
+        formatter.dateFormat = "d MMMM yyyy"
         date.setTitle(formatter.string(from: newDate), for: .normal)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension InformationTaskView: InInformationTaskViewOutput {
+    func didSwitchIsOn() -> Bool {
+        switchControl.isOn
     }
 }
