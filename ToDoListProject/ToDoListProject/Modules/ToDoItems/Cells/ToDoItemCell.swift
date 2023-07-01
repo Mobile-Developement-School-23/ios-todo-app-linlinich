@@ -40,7 +40,7 @@ class ToDoItemCell: UITableViewCell {
         imageView.backgroundColor = UIColor(asset: Asset.Colors.backSecondary)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 12
-        imageView.addTarget(self, action: #selector(didTapDoneButton), for: .touchUpInside)
+        imageView.addTarget(nil, action: #selector(didTapDoneButton), for: .touchUpInside)
         return imageView
     }()
     
@@ -109,8 +109,10 @@ class ToDoItemCell: UITableViewCell {
             circleImageView.backgroundColor = UIColor(asset: Asset.Colors.while)
             circleImageView.layer.cornerRadius = 20
             taskLabel.textColor = UIColor(asset: Asset.Colors.labelTertiary)
-            var attributeString: NSMutableAttributedString = NSMutableAttributedString(string: data.text)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSMakeRange(0, attributeString.length))
+            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: data.text)
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                         value: 1,
+                                         range: NSRange(location: 0, length: attributeString.length))
             taskLabel.attributedText = attributeString
             return
         }
@@ -122,7 +124,10 @@ class ToDoItemCell: UITableViewCell {
             }
             formatter.dateFormat = "d MMMM"
             
-            let symbolImage = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14, weight: .regular))?.withTintColor(UIColor(asset: Asset.Colors.labelTertiary) ?? .red, renderingMode: .alwaysOriginal)
+            let symbolImage = UIImage(systemName: "calendar",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 14, weight: .regular))?
+                                      .withTintColor(UIColor(asset: Asset.Colors.labelTertiary) ?? .red,
+                                      renderingMode: .alwaysOriginal)
             let symbolAttachment = NSTextAttachment()
             symbolAttachment.image = symbolImage
 
@@ -138,12 +143,18 @@ class ToDoItemCell: UITableViewCell {
             let symbolImage: UIImage
             switch data.importance {
             case .important:
-                symbolImage = UIImage(systemName: "exclamationmark.2", withConfiguration: UIImage.SymbolConfiguration(pointSize: Constans.TaskLabel.fontSize, weight: .bold))?.withTintColor(UIColor(asset: Asset.Colors.red) ?? .red, renderingMode: .alwaysOriginal) ?? UIImage()
+                symbolImage = UIImage(systemName: "exclamationmark.2",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: Constans.TaskLabel.fontSize, weight: .bold))?
+                                      .withTintColor(UIColor(asset: Asset.Colors.red) ?? .red,
+                                      renderingMode: .alwaysOriginal) ?? UIImage()
                 circleImageView.tintColor = UIColor(asset: Asset.Colors.red)
                 let backgroundColor = UIColor(asset: Asset.Colors.redBackground)
                 circleImageView.backgroundColor = backgroundColor
             case .unimportant:
-                symbolImage = UIImage(systemName: "arrow.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))?.withTintColor(UIColor(asset: Asset.Colors.gray) ?? .gray, renderingMode: .alwaysOriginal) ?? UIImage()
+                symbolImage = UIImage(systemName: "arrow.down",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))?
+                                      .withTintColor(UIColor(asset: Asset.Colors.gray) ?? .gray,
+                                      renderingMode: .alwaysOriginal) ?? UIImage()
             case .usual:
                 taskLabel.text = data.text
                 return
@@ -154,7 +165,9 @@ class ToDoItemCell: UITableViewCell {
 
             let attributedString = NSMutableAttributedString(attachment: symbolAttachment)
             attributedString.append(NSAttributedString(string: " " + data.text))
-            attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 0, range: NSRange(location: 0, length: attributedString.length))
+            attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                          value: 0,
+                                          range: NSRange(location: 0, length: attributedString.length))
             
             taskLabel.attributedText = attributedString
             return
@@ -217,7 +230,7 @@ class ToDoItemCell: UITableViewCell {
             deadlineLabel.topAnchor.constraint(equalTo: taskLabel.bottomAnchor),
             deadlineLabel.leadingAnchor.constraint(equalTo: taskLabel.leadingAnchor),
             deadlineLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            deadlineLabel.widthAnchor.constraint(equalToConstant: 100),
+            deadlineLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     

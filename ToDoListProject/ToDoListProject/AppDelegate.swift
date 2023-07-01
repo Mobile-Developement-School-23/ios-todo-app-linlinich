@@ -1,16 +1,20 @@
-
-
 import UIKit
+import CocoaLumberjackSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    public let fileLogger: DDFileLogger = DDFileLogger()
+        private func setLogger() {
+            DDLog.add(DDTTYLogger.sharedInstance!)
+            fileLogger.rollingFrequency = TimeInterval(60*60*24)
+            DDLog.add(fileLogger, with: .info)
+        }
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
-    }
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+            setLogger()
+            return true
+        }
 
     // MARK: UISceneSession Lifecycle
 

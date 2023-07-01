@@ -6,7 +6,7 @@ protocol FileCacheProtocol {
 
 class FileCache: FileCacheProtocol {
     static let shared = FileCache()
-    private (set) var collectionOfToDoItems: Array<TodoItem> = []
+    private (set) var collectionOfToDoItems = [TodoItem]()
     
     init(collectionOfToDoItems: [TodoItem] = [TodoItem]()) {
         self.collectionOfToDoItems = collectionOfToDoItems
@@ -31,8 +31,7 @@ class FileCache: FileCacheProtocol {
         
         var dict: [String: Any] = [:]
         do {
-            guard let dictJson = try JSONSerialization.jsonObject(with: json, options: []) as? [String: Any] else
-            {
+            guard let dictJson = try JSONSerialization.jsonObject(with: json, options: []) as? [String: Any] else {
                 print("Ошибка при парсинге")
                 return
             }
@@ -111,7 +110,6 @@ class FileCache: FileCacheProtocol {
             savePath = "newfile"
         }
 
-        let url = URL.documentsDirectory
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsDirectory.appendingPathComponent("\(savePath).json")
@@ -122,7 +120,7 @@ class FileCache: FileCacheProtocol {
         }
 
         do {
-            let dict: [String:Any] = ["toDoItems": array]
+            let dict: [String: Any] = ["toDoItems": array]
             let data = try JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
             try data.write(to: fileURL)
         } catch {

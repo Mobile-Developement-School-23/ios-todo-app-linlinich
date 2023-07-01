@@ -7,6 +7,6 @@
 
 import Foundation
 //
-//protocol FileCacheInput: AnyObject {
+// protocol FileCacheInput: AnyObject {
 //    static func readJSON(path: String) -> [TodoItem]?
-//}
+// }

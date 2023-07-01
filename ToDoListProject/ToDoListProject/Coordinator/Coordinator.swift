@@ -13,7 +13,7 @@ protocol CoordinatorProtocol: AnyObject {
     func finish()
 }
 
-final class Coordinator: NSObject, CoordinatorProtocol{
+final class Coordinator: NSObject, CoordinatorProtocol {
     
     func start(navigationController: UINavigationController) {
         let builder = ToDoItemsBuilder()

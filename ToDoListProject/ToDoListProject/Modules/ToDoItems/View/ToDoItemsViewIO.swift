@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 // MARK: - ToDoItems ViewInput
 protocol ToDoItemsViewInput: AnyObject {
     func reload()

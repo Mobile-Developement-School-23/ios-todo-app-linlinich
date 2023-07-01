@@ -1,4 +1,3 @@
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -15,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
         
-        let databaseService = FileCache(collectionOfToDoItems: [])
+        _ = FileCache(collectionOfToDoItems: [])
         coordinator = Coordinator()
         coordinator?.start(navigationController: navigationController)
     }

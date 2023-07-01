@@ -106,9 +106,15 @@ class InformationTaskView: UIView {
     let importanceSegmentControl: UISegmentedControl = {
         let control = UISegmentedControl()
         
-        let arrorDown = UIImage(systemName: "arrow.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))?.withTintColor(UIColor(asset: Asset.Colors.gray) ?? .gray, renderingMode: .alwaysOriginal)
+        let arrorDown = UIImage(systemName: "arrow.down",
+                                withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))?
+                                .withTintColor(UIColor(asset: Asset.Colors.gray) ?? .gray,
+                                renderingMode: .alwaysOriginal)
         
-        let exclamationMarks = UIImage(systemName: "exclamationmark.2", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14, weight: .bold))?.withTintColor(UIColor(asset: Asset.Colors.red) ?? .red, renderingMode: .alwaysOriginal)
+        let exclamationMarks = UIImage(systemName: "exclamationmark.2",
+                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 14, weight: .bold))?
+                                        .withTintColor(UIColor(asset: Asset.Colors.red) ?? .red,
+                                        renderingMode: .alwaysOriginal)
         
         control.insertSegment(with: arrorDown, at: 0, animated: false)
         control.insertSegment(withTitle: "нет", at: 1, animated: false)

@@ -14,7 +14,9 @@
 		5621C6722A43885700B67C52 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5621C6712A43885700B67C52 /* Images.xcassets */; };
 		5621C6762A43962500B67C52 /* ToDoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621C6752A43962500B67C52 /* ToDoItemCell.swift */; };
 		56B0ABBB2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0ABBA2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift */; };
-		56B0ABBD2A4FB60700503A9D /* .gitignore.txt in Resources */ = {isa = PBXBuildFile; fileRef = 56B0ABBC2A4FB60700503A9D /* .gitignore.txt */; };
+		56B0ABC02A4FC45D00503A9D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 56B0ABBF2A4FC45D00503A9D /* .swiftlint.yml */; };
+		56B0ABC32A4FD07400503A9D /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 56B0ABC22A4FD07400503A9D /* CocoaLumberjack */; };
+		56B0ABC52A4FD07400503A9D /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 56B0ABC42A4FD07400503A9D /* CocoaLumberjackSwift */; };
 		56B970AD2A3867EC00D31378 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970AC2A3867EC00D31378 /* AppDelegate.swift */; };
 		56B970AF2A3867EC00D31378 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970AE2A3867EC00D31378 /* SceneDelegate.swift */; };
 		56B970B12A3867EC00D31378 /* ToDoItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970B02A3867EC00D31378 /* ToDoItemsViewController.swift */; };
@@ -65,7 +67,7 @@
 		5621C6712A43885700B67C52 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../../../.Trash/Images.xcassets; sourceTree = "<group>"; };
 		5621C6752A43962500B67C52 /* ToDoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemCell.swift; sourceTree = "<group>"; };
 		56B0ABBA2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemsModuleIO.swift; sourceTree = "<group>"; };
-		56B0ABBC2A4FB60700503A9D /* .gitignore.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore.txt; sourceTree = "<group>"; };
+		56B0ABBF2A4FC45D00503A9D /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		56B970A92A3867EC00D31378 /* ToDoListProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B970AC2A3867EC00D31378 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56B970AE2A3867EC00D31378 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +102,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B0ABC32A4FD07400503A9D /* CocoaLumberjack in Frameworks */,
 				958F8CA89C109D880022D77A /* Pods_ToDoListProject.framework in Frameworks */,
+				56B0ABC52A4FD07400503A9D /* CocoaLumberjackSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +148,7 @@
 		56B970A02A3867EC00D31378 = {
 			isa = PBXGroup;
 			children = (
-				56B0ABBC2A4FB60700503A9D /* .gitignore.txt */,
+				56B0ABBF2A4FC45D00503A9D /* .swiftlint.yml */,
 				5621C6682A437BA100B67C52 /* swiftgen.yml */,
 				56B970AB2A3867EC00D31378 /* ToDoListProject */,
 				56B970C22A3867EE00D31378 /* ToDoListProjectTests */,
@@ -327,16 +331,21 @@
 			buildConfigurationList = 56B970D32A3867EE00D31378 /* Build configuration list for PBXNativeTarget "ToDoListProject" */;
 			buildPhases = (
 				4CA72AE3A229CC2821155C9F /* [CP] Check Pods Manifest.lock */,
-				5621C6632A43549A00B67C52 /* SwiftGen */,
 				56B970A52A3867EC00D31378 /* Sources */,
 				56B970A62A3867EC00D31378 /* Frameworks */,
 				56B970A72A3867EC00D31378 /* Resources */,
+				5621C6632A43549A00B67C52 /* SwiftGen */,
+				56B0ABBE2A4FBB7C00503A9D /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ToDoListProject;
+			packageProductDependencies = (
+				56B0ABC22A4FD07400503A9D /* CocoaLumberjack */,
+				56B0ABC42A4FD07400503A9D /* CocoaLumberjackSwift */,
+			);
 			productName = ToDoListProject;
 			productReference = 56B970A92A3867EC00D31378 /* ToDoListProject.app */;
 			productType = "com.apple.product-type.application";
@@ -411,6 +420,9 @@
 				Base,
 			);
 			mainGroup = 56B970A02A3867EC00D31378;
+			packageReferences = (
+				56B0ABC12A4FD07400503A9D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+			);
 			productRefGroup = 56B970AA2A3867EC00D31378 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -427,11 +439,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B0ABC02A4FC45D00503A9D /* .swiftlint.yml in Resources */,
 				56B970B92A3867EE00D31378 /* LaunchScreen.storyboard in Resources */,
 				5621C65D2A41FC3500B67C52 /* Colors.xcassets in Resources */,
 				5621C6692A437BA100B67C52 /* swiftgen.yml in Resources */,
 				5621C6722A43885700B67C52 /* Images.xcassets in Resources */,
-				56B0ABBD2A4FB60700503A9D /* .gitignore.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +510,7 @@
 		};
 		5621C6632A43549A00B67C52 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -513,6 +526,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi \n";
+		};
+		56B0ABBE2A4FBB7C00503A9D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which ${PODS_ROOT}/SwiftLint/swiftlint > /dev/null; then\n  ${PODS_ROOT}/SwiftLint/swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		A30C3434541A10B3541F443F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -897,6 +928,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		56B0ABC12A4FD07400503A9D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		56B0ABC22A4FD07400503A9D /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56B0ABC12A4FD07400503A9D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjack;
+		};
+		56B0ABC42A4FD07400503A9D /* CocoaLumberjackSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56B0ABC12A4FD07400503A9D /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjackSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56B970A12A3867EC00D31378 /* Project object */;
 }

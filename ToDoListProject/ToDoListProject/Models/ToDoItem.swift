@@ -122,7 +122,7 @@ extension TodoItem {
     }
     
     static func parse(csv: String) -> TodoItem? {
-        var mas = csv.components(separatedBy: ",").map{String($0)}
+        let mas = csv.components(separatedBy: ",").map { String($0) }
         let formatter = DateFormatter()
         if let localeID = Locale.preferredLanguages.first {
             formatter.locale = Locale(identifier: localeID)
@@ -130,7 +130,7 @@ extension TodoItem {
         formatter.dateFormat = "dd.MM.yyyy HH:mm"
         guard let didDone = Bool(mas[4]) else { return nil }
         guard let dateOfCreation = formatter.date(from: mas[5]) else { return nil }
-        if mas.count == 7, mas[0] != "" , mas[1] != "", mas[5] != "" {
+        if mas.count == 7, mas[0] != "", mas[1] != "", mas[5] != "" {
             let importance: ImportanceOfTask
             
             if mas[2] == "" {
@@ -176,7 +176,7 @@ extension TodoItem {
         }
         formatter.dateFormat = "dd.MM.yyyy HH:mm"
         
-        var mas: Array<String> = []
+        var mas: [String] = []
         mas += [id, text, importance.rawValue]
         
         if let deadline = deadline {
