@@ -12,6 +12,7 @@ protocol SingleTaskViewControllerOutput: AnyObject {
     func reloadData()
     func changeItem(item: TodoItem)
     func addItem(item: TodoItem)
+    
 }
 
 

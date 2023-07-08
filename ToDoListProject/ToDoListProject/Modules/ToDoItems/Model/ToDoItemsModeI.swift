@@ -51,7 +51,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
     
     func addingItem(item: TodoItem) {
         if FileCache.isDirty == true {
-            reloadToDoItems(items: service.collectionOfToDoItems)
+            output?.reloadToDoItems()
         }
         let url = try? RequestProcessor.makeUrl(id: item.id)
         var dict: [String: Any] = ["element": item.json]
@@ -64,7 +64,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (revision, _) = result
                 FileCache.isDirty = false
                 RequestProcessor.revision = revision
-                //loadToDoItems()
+                loadToDoItems()
             case .failure(let error):
                 output?.saveItemsToFile()
                 FileCache.isDirty = true
@@ -75,7 +75,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
     
     func addingNewItem(item: TodoItem) {
         if FileCache.isDirty == true {
-            reloadToDoItems(items: service.collectionOfToDoItems)
+            output?.reloadToDoItems()
         }
         let url = try? RequestProcessor.makeUrl()
         var dict: [String: Any] = ["element": item.json]
@@ -86,7 +86,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
             switch result {
             case .success(let result):
                 let (revision, _) = result
-                //loadToDoItems()
+                loadToDoItems()
                 RequestProcessor.revision = revision
                 FileCache.isDirty = false
             case .failure(let error):
@@ -99,7 +99,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
     
     func deleteItem(id: String) {
         if FileCache.isDirty == true {
-            reloadToDoItems(items: service.collectionOfToDoItems)
+            output?.reloadToDoItems()
         }
         let url = try? RequestProcessor.makeUrl(id: id)
         RequestProcessor.performMyAwesomeRequest1(url: url!, method: .delete) { [weak self] result in

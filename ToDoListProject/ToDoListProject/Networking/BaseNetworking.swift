@@ -34,7 +34,6 @@ class RequestProcessor: NetworkingService {
                     completion(
                         .failure(error)
                     )
-                    FileCache.isDirty = true
                     return
                 }
                 
@@ -82,7 +81,6 @@ class RequestProcessor: NetworkingService {
         }
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if let error = error {
-                    FileCache.isDirty = true
                     return
                 }
                 
@@ -117,7 +115,6 @@ class RequestProcessor: NetworkingService {
                 request.httpBody = body
                 URLSession.shared.dataTask(with: request) { (data, response, error) in
                     if let error = error {
-                        FileCache.isDirty = true
                         return
                     }
                     

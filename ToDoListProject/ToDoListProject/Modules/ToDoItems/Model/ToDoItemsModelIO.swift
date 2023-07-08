@@ -19,4 +19,5 @@ protocol ToDoItemsModelInput: AnyObject {
 protocol ToDoItemsModelOutput: AnyObject {
     func didRecieveData(items: [TodoItem])
     func saveItemsToFile()
+    func reloadToDoItems()
 }
