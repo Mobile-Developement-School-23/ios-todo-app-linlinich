@@ -27,12 +27,42 @@ final class ToDoItemsPresenter {
 
 private extension ToDoItemsPresenter {
     func loadToDoItems() {
-        model.loadToDoItems()
+        Task {
+            do {
+                try await model.loadToDoItems()
+            } catch {
+                print("ошибка")
+            }
+        }
     }
+    func reloadToDoItems() {
+        Task {
+            do {
+                try await model.reloadToDoItems(items: toDoItems)
+            } catch {
+                print("ошибка")
+            }
+        }
+    }
+    
     
 }
 
 extension ToDoItemsPresenter: ToDoItemsViewOutput {
+    func changeItem(item: TodoItem) {
+        if let index = toDoItems.firstIndex(where: {item.id == $0.id}) {
+            toDoItems[index] = item
+            view?.reload()
+        } else {
+           return
+        }
+    }
+    
+    func addItem(item: TodoItem) {
+        toDoItems.append(item)
+        view?.reload()
+    }
+    
     func checkIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int) -> Bool {
         if row < toDoItems.count {
             var item: TodoItem
@@ -67,6 +97,7 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
             switch type {
             case .all:
                 let id = toDoItems[row].id
+                print(id)
                 model.deleteItem(id: id)
             case .undone:
                 let id = toDoItems.filter { $0.didDone == false }[row].id
@@ -106,6 +137,12 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
 }
 
 extension ToDoItemsPresenter: ToDoItemsModelOutput {
+    func saveItemsToFile() {
+        let service = FileCache.shared
+        service.collectionOfToDoItems = toDoItems
+        service.writeJSON(path: "newFile")
+    }
+    
     func didRecieveData(items: [TodoItem]) {
         self.toDoItems = items.sorted(by: {$0.dateOfCreation > $1.dateOfCreation})
         view?.reload()

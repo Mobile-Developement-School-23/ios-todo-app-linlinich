@@ -21,4 +21,6 @@ protocol ToDoItemsViewOutput: AnyObject {
     func deleteItem(type: ToDoItemsViewController.TypeOfTableView, row: Int)
     func changeIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int)
     func checkIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int) -> Bool
+    func changeItem(item: TodoItem)
+    func addItem(item: TodoItem)
 }

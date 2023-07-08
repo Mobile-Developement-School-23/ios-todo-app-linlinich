@@ -1,5 +1,4 @@
 import UIKit
-import Combine
 
 final class ToDoItemsViewController: UIViewController {
     
@@ -9,7 +8,7 @@ final class ToDoItemsViewController: UIViewController {
         case all
         case undone
     }
-
+    
     var typeOfTableView: TypeOfTableView = .undone
     private let itemsCellId = "itemsCellId"
     private let headerView = HeaderViewForMyTasks()
@@ -27,13 +26,13 @@ final class ToDoItemsViewController: UIViewController {
         toDoItemsTableView.separatorColor = UIColor(asset: Asset.Colors.separator)
         toDoItemsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
     lazy var addingButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
         button.backgroundColor = .white
         button.layer.cornerRadius = 50
-
+        
         let shadowPath = UIBezierPath(roundedRect: button.bounds, cornerRadius: 0)
         button.layer.shadowPath = shadowPath.cgPath
         button.layer.shadowOpacity = 1
@@ -41,17 +40,17 @@ final class ToDoItemsViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 0, height: 8)
         button.layer.shadowColor = UIColor(asset: Asset.Colors.shadow)?.cgColor
         button.layer.position = button.center
-
+        
         button.setBackgroundImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
         button.tintColor = UIColor(asset: Asset.Colors.blue)
         button.translatesAutoresizingMaskIntoConstraints = false
-
+        
         button.addTarget(self, action: #selector(didTouchAddingButton), for: .touchUpInside)
-
+        
         return button
     }()
-
-
+    
+    
     override func viewDidLoad() {
         output?.didLoadView()
         super.viewDidLoad()
@@ -184,8 +183,6 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
         if indexPath.row != output?.getCellsCount(type: self.typeOfTableView) {
             let delete = UIContextualAction(style: .destructive, title: nil) { (_, _, _) in
                 self.output?.deleteItem(type: self.typeOfTableView, row: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.reloadData()
             }
             delete.image = UIImage(systemName: "trash.fill")
             delete.backgroundColor = UIColor(asset: Asset.Colors.red)
@@ -256,24 +253,26 @@ extension ToDoItemsViewController: ToDoItemCellDelegate {
     @objc func didTapDoneButton(indexPath: IndexPath) {
         output?.changeIsDone(type: typeOfTableView, row: indexPath.row)
         headerView.configure(countOfCompleted: output?.countOfCompleted() ?? 0, delegate: self)
-        switch typeOfTableView {
-        case .all:
-            toDoItemsTableView.reloadRows(at: [indexPath], with: .fade)
-        case .undone:
-            toDoItemsTableView.deleteRows(at: [indexPath], with: .fade)
-            toDoItemsTableView.reloadData()
-        }
+        
     }
 }
 
 extension ToDoItemsViewController: ToDoItemsViewInput {
     func reload() {
+        toDoItemsTableView.reloadData()
     }
 }
 
 extension ToDoItemsViewController: SingleTaskViewControllerOutput {
+    func changeItem(item: TodoItem) {
+        output?.changeItem(item: item)
+    }
+    
+    func addItem(item: TodoItem) {
+        output?.addItem(item: item)
+    }
+    
     func reloadData() {
         output?.didLoadView()
-        toDoItemsTableView.reloadData()
     }
 }
