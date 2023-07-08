@@ -6,7 +6,8 @@ protocol FileCacheProtocol {
 
 class FileCache: FileCacheProtocol {
     static let shared = FileCache()
-    private (set) var collectionOfToDoItems = [TodoItem]()
+    static var isDirty: Bool = false
+    var collectionOfToDoItems = [TodoItem]()
     
     init(collectionOfToDoItems: [TodoItem] = [TodoItem]()) {
         self.collectionOfToDoItems = collectionOfToDoItems
@@ -40,7 +41,7 @@ class FileCache: FileCacheProtocol {
             print("Ошибка при парсинге JSON")
         }
         
-        guard let collectionOfToDoItemsJson = dict["toDoItems"] as? [[String: Any]] else {
+        guard let collectionOfToDoItemsJson = dict["list"] as? [[String: Any]] else {
             print("Ошибка! в файле нет ToDoItem")
             return
         }
@@ -53,53 +54,6 @@ class FileCache: FileCacheProtocol {
         }
         
         
-    }
-    
-    func readCSV(path: String) {
-        collectionOfToDoItems = []
-        let fileManager = FileManager.default
-        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsDirectory.appendingPathComponent("\(path).csv")
-        
-        do {
-            let contents = try String(contentsOf: fileURL, encoding: .utf8)
-            let rows = contents.components(separatedBy: "\n")
-            for row in rows[1...rows.count - 2] {
-                let itemtodo = TodoItem.parse(csv: row)
-                if let itemtodo {
-                    addingNewItem(item: itemtodo)
-                }
-            }
-        } catch {
-            print("Error reading from file: \(error)")
-        }
-    }
-    
-    func writeCSV(path: String?) {
-        collectionOfToDoItems = []
-        var savePath: String
-        if let str = path {
-            savePath = str
-        } else {
-            savePath = "newfile"
-        }
-        let fileManager = FileManager.default
-        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsDirectory.appendingPathComponent("\(savePath).csv")
-
-        var csvText = "id,text,importance,deadline,didDone,dateOfCreation,dateOfChange\n"
-        
-        for item in collectionOfToDoItems {
-            let newItem = item.csv+"\n"
-            csvText.append(newItem)
-        }
-
-        do {
-            try csvText.write(to: fileURL, atomically: true, encoding: .utf8)
-            print("File saved successfully")
-        } catch {
-            print("Error saving file: \(error)")
-        }
     }
 
     func writeJSON(path: String?) {
@@ -120,7 +74,7 @@ class FileCache: FileCacheProtocol {
         }
 
         do {
-            let dict: [String: Any] = ["toDoItems": array]
+            let dict: [String: Any] = ["list": array]
             let data = try JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
             try data.write(to: fileURL)
         } catch {

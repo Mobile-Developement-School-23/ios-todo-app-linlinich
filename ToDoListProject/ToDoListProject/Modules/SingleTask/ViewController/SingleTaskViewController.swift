@@ -10,6 +10,8 @@ import UIKit
 
 protocol SingleTaskViewControllerOutput: AnyObject {
     func reloadData()
+    func changeItem(item: TodoItem)
+    func addItem(item: TodoItem)
 }
 
 
@@ -162,7 +164,6 @@ final class SingleTaskViewController: UIViewController {
     @objc func keyboardWillHide(sender: NSNotification) {
         if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             view.frame.size.height += keyboardSize.height
-            view.endEditing(true)
         }
     }
     
@@ -180,7 +181,6 @@ final class SingleTaskViewController: UIViewController {
                 self.stackViewWithInformation.isHidden = false
                 self.listItem.heightAnchor.constraint(equalToConstant: 120).isActive = true
                 self.listItem.heightAnchor.constraint(equalToConstant: 120).isActive = false
-               // self.myConstraints()
             }
 
         }, completion: nil)
@@ -254,14 +254,19 @@ final class SingleTaskViewController: UIViewController {
                                 importance: importance,
                                 deadline: deadline,
                                 dateOfCreation: inputTodoItem.dateOfCreation,
-                                dateOfChange: .now)
+                                dateOfChange: .now,
+                                lastUpdated: "kkd")
+                model.addingItem(item: item)
+                output?.changeItem(item: item)
             } else {
                 item = TodoItem(text: text,
                                 importance: importance,
-                                deadline: deadline)
+                                deadline: deadline,
+                                dateOfChange: .now,
+                                lastUpdated: "kdkd")
+                model.addingNewItem(item: item)
+                output?.addItem(item: item)
             }
-            model.addingItem(item: item)
-            output?.reloadData()
             self.dismiss(animated: true)
         }
     }
@@ -295,8 +300,10 @@ extension SingleTaskViewController: UITextViewDelegate {
             textView.text = nil
             textView.textColor = UIColor(asset: Asset.Colors.labelPrimary)
         }
-        
-        if textView.textColor == UIColor(asset: Asset.Colors.labelPrimary) {
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.textColor == UIColor(asset: Asset.Colors.labelPrimary) && textView.text.count > 0 {
             navigationItem.rightBarButtonItem?.isEnabled = true
             deleteButton.setTitleColor(UIColor(asset: Asset.Colors.red), for: .normal)
         }
