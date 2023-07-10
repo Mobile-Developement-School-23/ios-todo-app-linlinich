@@ -17,6 +17,8 @@
 		56B0ABC02A4FC45D00503A9D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 56B0ABBF2A4FC45D00503A9D /* .swiftlint.yml */; };
 		56B0ABC32A4FD07400503A9D /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 56B0ABC22A4FD07400503A9D /* CocoaLumberjack */; };
 		56B0ABC52A4FD07400503A9D /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 56B0ABC42A4FD07400503A9D /* CocoaLumberjackSwift */; };
+		56B0ABCF2A5717FA00503A9D /* BaseNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0ABCE2A5717FA00503A9D /* BaseNetworking.swift */; };
+		56B0ABD12A5901E200503A9D /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0ABD02A5901E200503A9D /* NetworkingService.swift */; };
 		56B970AD2A3867EC00D31378 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970AC2A3867EC00D31378 /* AppDelegate.swift */; };
 		56B970AF2A3867EC00D31378 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970AE2A3867EC00D31378 /* SceneDelegate.swift */; };
 		56B970B12A3867EC00D31378 /* ToDoItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970B02A3867EC00D31378 /* ToDoItemsViewController.swift */; };
@@ -68,6 +70,8 @@
 		5621C6752A43962500B67C52 /* ToDoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemCell.swift; sourceTree = "<group>"; };
 		56B0ABBA2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemsModuleIO.swift; sourceTree = "<group>"; };
 		56B0ABBF2A4FC45D00503A9D /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		56B0ABCE2A5717FA00503A9D /* BaseNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworking.swift; sourceTree = "<group>"; };
+		56B0ABD02A5901E200503A9D /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		56B970A92A3867EC00D31378 /* ToDoListProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B970AC2A3867EC00D31378 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56B970AE2A3867EC00D31378 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +149,15 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		56B0ABCD2A5717D200503A9D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				56B0ABCE2A5717FA00503A9D /* BaseNetworking.swift */,
+				56B0ABD02A5901E200503A9D /* NetworkingService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		56B970A02A3867EC00D31378 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +188,7 @@
 				56B970AC2A3867EC00D31378 /* AppDelegate.swift */,
 				56B970AE2A3867EC00D31378 /* SceneDelegate.swift */,
 				56E737802A4BB2C1005F0623 /* Database */,
+				56B0ABCD2A5717D200503A9D /* Networking */,
 				56E7377C2A4BB21D005F0623 /* Models */,
 				56E737782A4BB1C6005F0623 /* Modules */,
 				56E737852A4BB353005F0623 /* Coordinator */,
@@ -584,10 +598,12 @@
 				56E737702A454151005F0623 /* InformationTakView.swift in Sources */,
 				56E737772A4AF199005F0623 /* HeaderViewForMyTasks.swift in Sources */,
 				56E7376C2A44FC77005F0623 /* SingleTaskViewController.swift in Sources */,
+				56B0ABCF2A5717FA00503A9D /* BaseNetworking.swift in Sources */,
 				56B970AD2A3867EC00D31378 /* AppDelegate.swift in Sources */,
 				56E7378E2A4E3B14005F0623 /* ToDoItemsModelIO.swift in Sources */,
 				56B970DD2A38ABCE00D31378 /* ToDoItem.swift in Sources */,
 				56B970DF2A3A102200D31378 /* FileCache.swift in Sources */,
+				56B0ABD12A5901E200503A9D /* NetworkingService.swift in Sources */,
 				5621C6702A437F9000B67C52 /* XCAssets+Generated.swift in Sources */,
 				56B970AF2A3867EC00D31378 /* SceneDelegate.swift in Sources */,
 				56E737872A4E3AA1005F0623 /* ToDoItemsViewIO.swift in Sources */,

@@ -7,62 +7,111 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "855C6215-34B7-43D0-B722-CF6A7B3E7047"
+            uuid = "B3D2D4A2-769C-4A98-8066-299D34FB1607"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Presenter/ToDoItemsPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "didRecieveData(items:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66380FEE-85F2-4A46-AA60-F8D37968ABFF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Presenter/ToDoItemsPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "didRecieveData(items:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EBE91DF6-79B5-4719-AB81-727F49FBCFCD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Presenter/ToDoItemsPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "didRecieveData(items:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D633ECDB-107D-4A75-8C6D-AF72F8A2566F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Presenter/ToDoItemsPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "deleteItem(type:row:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7A592961-C182-4C0B-BC10-6E6A73BE0E72"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ToDoListProject/Modules/SingleTask/ViewController/SingleTaskViewController.swift"
+            filePath = "ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "didTapSaveButton()"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "tableView(_:trailingSwipeActionsConfigurationForRowAt:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "855C6215-34B7-43D0-B722-CF6A7B3E7047 - 1f9fcdd66d3a172e"
+                  uuid = "7A592961-C182-4C0B-BC10-6E6A73BE0E72 - c6c30c346254ecf4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ToDoListProject.SingleTaskViewController.didTapSaveButton() -&gt; ()"
+                  symbolName = "closure #1 (__C.UIContextualAction, __C.UIView, (Swift.Bool) -&gt; ()) -&gt; () in ToDoListProject.ToDoItemsViewController.tableView(_: __C.UITableView, trailingSwipeActionsConfigurationForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UISwipeActionsConfiguration&gt;"
                   moduleName = "ToDoListProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/SingleTask/ViewController/SingleTaskViewController.swift"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "198"
-                  endingLineNumber = "198"
-                  offsetFromSymbolStart = "2136">
+                  startingLineNumber = "185"
+                  endingLineNumber = "185"
+                  offsetFromSymbolStart = "188">
                </Location>
                <Location
-                  uuid = "855C6215-34B7-43D0-B722-CF6A7B3E7047 - 1f9fcdd66d3a1453"
+                  uuid = "7A592961-C182-4C0B-BC10-6E6A73BE0E72 - c6c30c346254ecf4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ToDoListProject.SingleTaskViewController.didTapSaveButton() -&gt; ()"
+                  symbolName = "closure #1 (__C.UIContextualAction, __C.UIView, (Swift.Bool) -&gt; ()) -&gt; () in ToDoListProject.ToDoItemsViewController.tableView(_: __C.UITableView, trailingSwipeActionsConfigurationForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UISwipeActionsConfiguration&gt;"
                   moduleName = "ToDoListProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/SingleTask/ViewController/SingleTaskViewController.swift"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "203"
-                  endingLineNumber = "203"
-                  offsetFromSymbolStart = "1940">
-               </Location>
-               <Location
-                  uuid = "855C6215-34B7-43D0-B722-CF6A7B3E7047 - 1f9fcdd66d3a1453"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ToDoListProject.SingleTaskViewController.didTapSaveButton() -&gt; ()"
-                  moduleName = "ToDoListProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/SingleTask/ViewController/SingleTaskViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "203"
-                  endingLineNumber = "203"
-                  offsetFromSymbolStart = "1952">
+                  startingLineNumber = "185"
+                  endingLineNumber = "185"
+                  offsetFromSymbolStart = "192">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -70,49 +119,207 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CDAB3CA7-40E8-4526-90FB-C01BFC75C9A9"
+            uuid = "F851351A-112B-4EEC-95AD-9122EBEB7A49"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ToDoListProject/Modules/SingleTask/ViewController/SingleTaskViewController.swift"
+            filePath = "ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
-            landmarkName = "didTapSaveButton()"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "tableView(_:trailingSwipeActionsConfigurationForRowAt:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "CDAB3CA7-40E8-4526-90FB-C01BFC75C9A9 - 1f9fcdd66d3a172e"
+                  uuid = "F851351A-112B-4EEC-95AD-9122EBEB7A49 - 8e335198880e19ce"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ToDoListProject.SingleTaskViewController.didTapSaveButton() -&gt; ()"
+                  symbolName = "ToDoListProject.ToDoItemsViewController.tableView(_: __C.UITableView, trailingSwipeActionsConfigurationForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UISwipeActionsConfiguration&gt;"
                   moduleName = "ToDoListProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/SingleTask/ViewController/SingleTaskViewController.swift"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "198"
-                  endingLineNumber = "198"
-                  offsetFromSymbolStart = "2304">
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "700">
                </Location>
                <Location
-                  uuid = "CDAB3CA7-40E8-4526-90FB-C01BFC75C9A9 - 1f9fcdd66d3a1474"
+                  uuid = "F851351A-112B-4EEC-95AD-9122EBEB7A49 - 8e335198880e19ce"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ToDoListProject.SingleTaskViewController.didTapSaveButton() -&gt; ()"
+                  symbolName = "ToDoListProject.ToDoItemsViewController.tableView(_: __C.UITableView, trailingSwipeActionsConfigurationForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UISwipeActionsConfiguration&gt;"
                   moduleName = "ToDoListProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/SingleTask/ViewController/SingleTaskViewController.swift"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "204"
-                  endingLineNumber = "204"
-                  offsetFromSymbolStart = "1952">
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "760">
+               </Location>
+               <Location
+                  uuid = "F851351A-112B-4EEC-95AD-9122EBEB7A49 - c6c30c346254ecf4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIContextualAction, __C.UIView, (Swift.Bool) -&gt; ()) -&gt; () in ToDoListProject.ToDoItemsViewController.tableView(_: __C.UITableView, trailingSwipeActionsConfigurationForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UISwipeActionsConfiguration&gt;"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "185"
+                  endingLineNumber = "185"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "F851351A-112B-4EEC-95AD-9122EBEB7A49 - c6c30c346254ec95"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIContextualAction, __C.UIView, (Swift.Bool) -&gt; ()) -&gt; () in ToDoListProject.ToDoItemsViewController.tableView(_: __C.UITableView, trailingSwipeActionsConfigurationForRowAt: Foundation.IndexPath) -&gt; Swift.Optional&lt;__C.UISwipeActionsConfiguration&gt;"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/View/ToDoItemsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "216">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CCE5B1B4-C073-406B-A96E-FC4215C66490"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "deleteItem(id:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F639705D-5276-47AC-9026-8D0089D4A5A4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "deleteItem(id:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B7DD76A1-FC9E-4852-919E-CD8FE5AE678F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "deleteItem(id:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A25A6F7D-324F-4158-980B-DFADC98C9C3C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Networking/BaseNetworking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "performMyAwesomeRequest1(urlSession:url:method:body:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FFB6EA0F-EA17-458D-B82C-DAE361131250"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Networking/BaseNetworking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "performMyAwesomeRequest1(urlSession:url:method:body:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F1EB618-44BC-4CBD-93CB-A59F4E217C71"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Networking/BaseNetworking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "performMyAwesomeRequest1(urlSession:url:method:body:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53A3C050-45CF-4E4B-86E2-2132762CC19D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Networking/BaseNetworking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "performMyAwesomeRequest1(urlSession:url:method:body:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "35815C10-8129-462C-849D-6BACF9520C9B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "addingNewItem(item:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
