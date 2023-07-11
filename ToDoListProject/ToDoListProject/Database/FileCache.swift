@@ -1,22 +1,21 @@
 import Foundation
 
 protocol FileCacheProtocol {
-    func readJSON(path: String)
+    func readJSON()
 }
 
 class FileCache: FileCacheProtocol {
     static let shared = FileCache()
-    static var isDirty: Bool = false
     var collectionOfToDoItems = [TodoItem]()
     
     init(collectionOfToDoItems: [TodoItem] = [TodoItem]()) {
         self.collectionOfToDoItems = collectionOfToDoItems
     }
     
-    func readJSON(path: String) {
+    func readJSON() {
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileURL = documentsDirectory.appendingPathComponent("\(path).json")
+        let fileURL = documentsDirectory.appendingPathComponent("newFile.json")
 
         var file: Data?
         do {
@@ -56,20 +55,15 @@ class FileCache: FileCacheProtocol {
         
     }
 
-    func writeJSON(path: String?) {
-        var savePath: String
-        if let str = path {
-            savePath = str
-        } else {
-            savePath = "newfile"
-        }
+    func writeJSON(items: [TodoItem]) {
+        let savePath = "newFile"
 
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsDirectory.appendingPathComponent("\(savePath).json")
         var array: [Any] = []
 
-        for item in collectionOfToDoItems {
+        for item in items {
             array.append(item.json)
         }
 
@@ -80,6 +74,7 @@ class FileCache: FileCacheProtocol {
         } catch {
             print("Error: \(error.localizedDescription)")
         }
+        collectionOfToDoItems = items
     }
 
     func addingNewItem(item: TodoItem) {

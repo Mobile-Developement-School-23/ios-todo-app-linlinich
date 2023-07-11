@@ -10,6 +10,7 @@ import Foundation
 // MARK: - ToDoItems ViewInput
 protocol ToDoItemsViewInput: AnyObject {
     func reload()
+    func changeNetworkStatus()
 }
 
 // MARK: - ToDoItems ViewOutput
@@ -23,4 +24,5 @@ protocol ToDoItemsViewOutput: AnyObject {
     func checkIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int) -> Bool
     func changeItem(item: TodoItem)
     func addItem(item: TodoItem)
+    var isDirty: Bool { get }
 }

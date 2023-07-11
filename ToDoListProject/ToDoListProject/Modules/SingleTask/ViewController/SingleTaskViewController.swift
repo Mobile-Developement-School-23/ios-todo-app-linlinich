@@ -256,7 +256,7 @@ final class SingleTaskViewController: UIViewController {
                                 dateOfCreation: inputTodoItem.dateOfCreation,
                                 dateOfChange: .now,
                                 lastUpdated: "kkd")
-                model.addingItem(item: item)
+                model.editingItem(item: item)
                 output?.changeItem(item: item)
             } else {
                 item = TodoItem(text: text,
@@ -336,11 +336,5 @@ extension SingleTaskViewController: InInformationTaskViewDelegate {
             self.calendarView.alpha = alpha
             self.calendarView.isHidden.toggle()
         }
-    }
-}
-
-extension SingleTaskViewController: UICalendarSelectionSingleDateDelegate & UICalendarViewDelegate {
-    func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
-        
     }
 }
