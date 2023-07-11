@@ -11,12 +11,18 @@ final class ToDoItemsPresenter {
     
     weak var  view: ToDoItemsViewInput?
     weak var moduleOutput: ToDoItemsModuleOutput?
+    var isDirty: Bool {
+        didSet {
+            view?.changeNetworkStatus()
+        }
+    }
     
     var toDoItems = [TodoItem]()
     private let model: ToDoItemsModelInput
-    init(view: ToDoItemsViewInput, model: ToDoItemsModelInput) {
+    init(view: ToDoItemsViewInput, model: ToDoItemsModelInput, isDirty: Bool = false) {
         self.view = view
         self.model = model
+        self.isDirty = isDirty
     }
     
     func didLoadView() {
@@ -27,25 +33,8 @@ final class ToDoItemsPresenter {
 
 private extension ToDoItemsPresenter {
     func loadToDoItems() {
-        Task {
-            do {
-                try await model.loadToDoItems()
-            } catch {
-                print("ошибка")
-            }
-        }
+        model.loadToDoItems()
     }
-    func reloadToDoItems() {
-        Task {
-            do {
-                try await model.reloadToDoItems(items: toDoItems)
-            } catch {
-                print("ошибка")
-            }
-        }
-    }
-    
-    
 }
 
 extension ToDoItemsPresenter: ToDoItemsViewOutput {
@@ -59,8 +48,9 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
     }
     
     func addItem(item: TodoItem) {
-        toDoItems.append(item)
         view?.reload()
+        toDoItems.append(item)
+        self.toDoItems = toDoItems.sorted(by: {$0.dateOfCreation > $1.dateOfCreation})
     }
     
     func checkIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int) -> Bool {
@@ -84,11 +74,17 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
             case .all:
                 item = toDoItems[row]
                 item.didDone = !toDoItems[row].didDone
+                toDoItems[row] = item
             case .undone:
                 item = toDoItems.filter { $0.didDone == false }[row]
                 item.didDone = true
+                if let index = toDoItems.map({$0.id}).firstIndex(of: item.id) {
+                    toDoItems[index] = item
+                }
             }
-            model.addingItem(item: item)
+            model.editingItem(item: item)
+            self.toDoItems = toDoItems.sorted(by: {$0.dateOfCreation > $1.dateOfCreation})
+            view?.reload()
         }
     }
     
@@ -97,11 +93,18 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
             switch type {
             case .all:
                 let id = toDoItems[row].id
-                print(id)
                 model.deleteItem(id: id)
+                if let index = toDoItems.map({$0.id}).firstIndex(of: id) {
+                    toDoItems.remove(at: index)
+                }
+                view?.reload()
             case .undone:
                 let id = toDoItems.filter { $0.didDone == false }[row].id
                 model.deleteItem(id: id)
+                if let index = toDoItems.map({$0.id}).firstIndex(of: id) {
+                    toDoItems.remove(at: index)
+                }
+                view?.reload()
             }
         }
     }
@@ -137,14 +140,20 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
 }
 
 extension ToDoItemsPresenter: ToDoItemsModelOutput {
+    
+    
     func saveItemsToFile() {
         let service = FileCache.shared
         service.collectionOfToDoItems = toDoItems
-        service.writeJSON(path: "newFile")
+        service.writeJSON(items: toDoItems)
     }
     
     func didRecieveData(items: [TodoItem]) {
         self.toDoItems = items.sorted(by: {$0.dateOfCreation > $1.dateOfCreation})
         view?.reload()
+    }
+    
+    func reloadToDoItems() {
+        model.reloadToDoItems(items: toDoItems)
     }
 }

@@ -13,8 +13,30 @@ final class ToDoItemsViewController: UIViewController {
     private let itemsCellId = "itemsCellId"
     private let headerView = HeaderViewForMyTasks()
     private lazy var toDoItemsTableView: UITableView = .init(frame: CGRect.zero, style: .insetGrouped)
+    private let loadingView = LoadingView()
+
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Идет обновление...")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
+    
+    private lazy var networkStatusIndicator: UIBarButtonItem = {
+        let imageView = UIBarButtonItem()
+        imageView.image = UIImage(systemName: "network",
+                                  withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))
+        return imageView
+    }()
+    
+    func setupLoadingView() {
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(loadingView)
+        view.bringSubviewToFront(loadingView)
+    }
     
     func setupTableView() {
+        toDoItemsTableView.addSubview(refreshControl)
         toDoItemsTableView.delegate = self
         toDoItemsTableView.frame = CGRect.zero
         toDoItemsTableView.dataSource = self
@@ -26,6 +48,8 @@ final class ToDoItemsViewController: UIViewController {
         toDoItemsTableView.separatorColor = UIColor(asset: Asset.Colors.separator)
         toDoItemsTableView.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    
     
     lazy var addingButton: UIButton = {
         let button = UIButton()
@@ -54,11 +78,10 @@ final class ToDoItemsViewController: UIViewController {
     override func viewDidLoad() {
         output?.didLoadView()
         super.viewDidLoad()
-        view.backgroundColor = UIColor(asset: Asset.Colors.backPrimary)
+        addSubwiews()
         setupNavBar()
-        view.addSubview(toDoItemsTableView)
-        view.addSubview(addingButton)
         setupTableView()
+        setupLoadingView()
         makeConstraints()
     }
 
@@ -70,10 +93,32 @@ final class ToDoItemsViewController: UIViewController {
         present(navigationController, animated: true, completion: nil)
     }
     
+    @objc
+    private func refresh() {
+        output?.didLoadView()
+    }
+    
     private func setupNavBar() {
         self.navigationItem.title = "Мои дела"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.directionalLayoutMargins.leading = 32
+        navigationItem.rightBarButtonItem = networkStatusIndicator
+    }
+    
+    private func addSubwiews() {
+        view.backgroundColor = UIColor(asset: Asset.Colors.backPrimary)
+        view.addSubview(toDoItemsTableView)
+        view.addSubview(addingButton)
+    }
+    
+    func changeNetworkStatus() {
+        if output?.isDirty == true {
+            networkStatusIndicator.image = UIImage(systemName: "house.circle",
+                                                   withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))
+        } else {
+            networkStatusIndicator.image = UIImage(systemName: "network",
+                                                   withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))
+        }
     }
 
     private func makeConstraints() {
@@ -84,13 +129,26 @@ final class ToDoItemsViewController: UIViewController {
             toDoItemsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-
         NSLayoutConstraint.activate([
             addingButton.heightAnchor.constraint(equalToConstant: 44),
             addingButton.widthAnchor.constraint(equalToConstant: 44),
             addingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -54)
         ])
+        
+        NSLayoutConstraint.activate([
+            loadingView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loadingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertViewController.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
+        self.present(alertViewController, animated: true)
     }
 }
 
@@ -205,9 +263,7 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
                     if let dateOfChange = data.dateOfChange {
                         message += "\nДата последнего изменения: \(formatter.string(from: dateOfChange))"
                     }
-                    let alertViewController = UIAlertController(title: "Информация о задаче", message: message, preferredStyle: .alert)
-                    alertViewController.addAction(UIAlertAction(title: "Закрыть", style: .cancel))
-                    self.present(alertViewController, animated: true)
+                    self.showAlert(title: "Информация о задаче", message: message)
                 }
                 complitionHand(true)
             }
@@ -259,7 +315,11 @@ extension ToDoItemsViewController: ToDoItemCellDelegate {
 
 extension ToDoItemsViewController: ToDoItemsViewInput {
     func reload() {
-        toDoItemsTableView.reloadData()
+        DispatchQueue.main.async { [self] in
+            toDoItemsTableView.reloadData()
+            loadingView.isHidden = true
+            self.refreshControl.endRefreshing()
+        }
     }
 }
 

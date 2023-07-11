@@ -8,9 +8,9 @@
 import Foundation
 
 protocol ToDoItemsModelInput: AnyObject {
-    func loadToDoItems() async throws
+    func loadToDoItems()
     func deleteItem(id: String)
-    func addingItem(item: TodoItem)
+    func editingItem(item: TodoItem)
     func reloadToDoItems(items: [TodoItem]) -> Bool
 }
 
@@ -20,4 +20,5 @@ protocol ToDoItemsModelOutput: AnyObject {
     func didRecieveData(items: [TodoItem])
     func saveItemsToFile()
     func reloadToDoItems()
+    var isDirty: Bool { get set }
 }
