@@ -256,7 +256,6 @@ final class SingleTaskViewController: UIViewController {
                                 dateOfCreation: inputTodoItem.dateOfCreation,
                                 dateOfChange: .now,
                                 lastUpdated: "kkd")
-                model.editingItem(item: item)
                 output?.changeItem(item: item)
             } else {
                 item = TodoItem(text: text,
@@ -264,7 +263,6 @@ final class SingleTaskViewController: UIViewController {
                                 deadline: deadline,
                                 dateOfChange: .now,
                                 lastUpdated: "kdkd")
-                model.addingNewItem(item: item)
                 output?.addItem(item: item)
             }
             self.dismiss(animated: true)

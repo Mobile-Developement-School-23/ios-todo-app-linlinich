@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class ToDoItemsModel {
-    weak var output: ToDoItemsModelOutput?
+    var output: ToDoItemsModelOutput?
     private let service = FileCache.shared
 }
 
@@ -29,10 +29,11 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         let data = try? JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
         Task {
             do {
+                output?.isDirty = false
+                
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url, method: .patch, body: data)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
-                output?.isDirty = false
             } catch {
                 output?.isDirty = true
                 output?.saveItemsToFile()
@@ -47,11 +48,12 @@ extension ToDoItemsModel: ToDoItemsModelInput {
             output?.reloadToDoItems()
         }
         let url = try? RequestProcessor.makeUrl(id: item.id)
-        var dict: [String: Any] = ["element": item.json]
+        let dict: [String: Any] = ["element": item.json]
 
         let data = try? JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
         Task {
             do {
+                output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .put, body: data)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
@@ -69,10 +71,11 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         }
 
         let url = try? RequestProcessor.makeUrl()
-        var dict: [String: Any] = ["element": item.json]
+        let dict: [String: Any] = ["element": item.json]
         let data = try? JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
         Task {
             do {
+                output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .post, body: data)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
@@ -90,6 +93,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         let url = try? RequestProcessor.makeUrl(id: id)
         Task {
             do {
+                output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .delete)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
@@ -108,11 +112,11 @@ extension ToDoItemsModel: ToDoItemsModelInput {
 
         Task {
             do {
+                output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
                 guard let (revision, items) = parseToDoItems(data: data) else { return }
                 RequestProcessor.revision = revision
                 output?.didRecieveData(items: items)
-                output?.isDirty = false
             } catch {
                 self.service.readJSON()
                 output?.didRecieveData(items: self.service.collectionOfToDoItems)
