@@ -13,7 +13,9 @@ final class ToDoItemsPresenter {
     weak var moduleOutput: ToDoItemsModuleOutput?
     var isDirty: Bool {
         didSet {
-            view?.changeNetworkStatus()
+            DispatchQueue.main.async {
+                self.view?.changeNetworkStatus()
+            }
         }
     }
     
@@ -45,12 +47,14 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
         } else {
            return
         }
+        model.editingItem(item: item)
     }
     
     func addItem(item: TodoItem) {
         view?.reload()
         toDoItems.append(item)
         self.toDoItems = toDoItems.sorted(by: {$0.dateOfCreation > $1.dateOfCreation})
+        model.addingNewItem(item: item)
     }
     
     func checkIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int) -> Bool {
