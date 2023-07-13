@@ -29,6 +29,8 @@
 		56B970DD2A38ABCE00D31378 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970DC2A38ABCE00D31378 /* ToDoItem.swift */; };
 		56B970DF2A3A102200D31378 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970DE2A3A102200D31378 /* FileCache.swift */; };
 		56C226592A5CAE9B00F6EEA9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C226582A5CAE9B00F6EEA9 /* LoadingView.swift */; };
+		56C2265C2A60600500F6EEA9 /* TableDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56C2265A2A60600500F6EEA9 /* TableDB.xcdatamodeld */; };
+		56C226622A60623000F6EEA9 /* SqLiteDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C226612A60623000F6EEA9 /* SqLiteDataBase.swift */; };
 		56E7376C2A44FC77005F0623 /* SingleTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7376B2A44FC77005F0623 /* SingleTaskViewController.swift */; };
 		56E7376E2A44FDA9005F0623 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7376D2A44FDA9005F0623 /* Coordinator.swift */; };
 		56E737702A454151005F0623 /* InformationTakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7376F2A454151005F0623 /* InformationTakView.swift */; };
@@ -87,6 +89,8 @@
 		56B970DC2A38ABCE00D31378 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		56B970DE2A3A102200D31378 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		56C226582A5CAE9B00F6EEA9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		56C2265B2A60600500F6EEA9 /* TableDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TableDB.xcdatamodel; sourceTree = "<group>"; };
+		56C226612A60623000F6EEA9 /* SqLiteDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqLiteDataBase.swift; sourceTree = "<group>"; };
 		56E7376B2A44FC77005F0623 /* SingleTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTaskViewController.swift; sourceTree = "<group>"; };
 		56E7376D2A44FDA9005F0623 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		56E7376F2A454151005F0623 /* InformationTakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTakView.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 			isa = PBXGroup;
 			children = (
 				56B970DE2A3A102200D31378 /* FileCache.swift */,
+				56C2265A2A60600500F6EEA9 /* TableDB.xcdatamodeld */,
+				56C226612A60623000F6EEA9 /* SqLiteDataBase.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -635,6 +641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56C226622A60623000F6EEA9 /* SqLiteDataBase.swift in Sources */,
 				56E737912A4E3B6A005F0623 /* ToDoItemsBuilder.swift in Sources */,
 				5621C6762A43962500B67C52 /* ToDoItemCell.swift in Sources */,
 				56B970B12A3867EC00D31378 /* ToDoItemsViewController.swift in Sources */,
@@ -654,6 +661,7 @@
 				56B0ABD12A5901E200503A9D /* NetworkingService.swift in Sources */,
 				5621C6702A437F9000B67C52 /* XCAssets+Generated.swift in Sources */,
 				56B970AF2A3867EC00D31378 /* SceneDelegate.swift in Sources */,
+				56C2265C2A60600500F6EEA9 /* TableDB.xcdatamodeld in Sources */,
 				56E737872A4E3AA1005F0623 /* ToDoItemsViewIO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1016,6 +1024,19 @@
 			productName = CocoaLumberjackSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		56C2265A2A60600500F6EEA9 /* TableDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56C2265B2A60600500F6EEA9 /* TableDB.xcdatamodel */,
+			);
+			currentVersion = 56C2265B2A60600500F6EEA9 /* TableDB.xcdatamodel */;
+			path = TableDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 56B970A12A3867EC00D31378 /* Project object */;
 }

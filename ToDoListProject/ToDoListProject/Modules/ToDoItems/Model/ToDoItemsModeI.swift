@@ -10,7 +10,7 @@ import UIKit
 
 final class ToDoItemsModel {
     var output: ToDoItemsModelOutput?
-    private let service = FileCache.shared
+    let dataBase = Database.shared
 }
 
 extension ToDoItemsModel: ToDoItemsModelInput {
@@ -32,18 +32,18 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 output?.isDirty = false
                 
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url, method: .patch, body: data)
-                print(responseStatusCode)
-                guard let (revision, _) = parseSingleItem(data: data) else { return }
-                RequestProcessor.revision = revision
-                
+             
                 if responseStatusCode == 400 {
                     getCurrentRevision()
+                    output?.loading()
                     reloadToDoItems(items: items)
+                    getCurrentRevision()
                 }
+                guard let (revision, _) = parseSingleItem(data: data) else { return }
+                RequestProcessor.revision = revision
 
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
             
         }
@@ -53,6 +53,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
+        dataBase.incertOrReplace(item: item)
         let url = try? RequestProcessor.makeUrl(id: item.id)
         let dict: [String: Any] = ["element": item.json]
 
@@ -61,18 +62,19 @@ extension ToDoItemsModel: ToDoItemsModelInput {
             do {
                 output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .put, body: data)
+                
+                if responseStatusCode == 400 {
+                    getCurrentRevision()
+                    output?.loading()
+                    editingItem(item: item)
+                    getCurrentRevision()
+                }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
                 
-                print(responseStatusCode)
-                if responseStatusCode == 400 {
-                    getCurrentRevision()
-                    editingItem(item: item)
-                }
 
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
             
         }
@@ -82,7 +84,8 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
-
+        dataBase.incertOrReplace(item: item)
+        print(item)
         let url = try? RequestProcessor.makeUrl()
         let dict: [String: Any] = ["element": item.json]
         let data = try? JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
@@ -90,17 +93,18 @@ extension ToDoItemsModel: ToDoItemsModelInput {
             do {
                 output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .post, body: data)
-                guard let (revision, _) = parseSingleItem(data: data) else { return }
-                RequestProcessor.revision = revision
                 
                 if responseStatusCode == 400 {
                     getCurrentRevision()
+                    output?.loading()
                     addingNewItem(item: item)
+                    getCurrentRevision()
                 }
+                guard let (revision, _) = parseSingleItem(data: data) else { return }
+                RequestProcessor.revision = revision
 
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
         }
     }
@@ -109,22 +113,24 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
+        dataBase.delete(id: id)
         let url = try? RequestProcessor.makeUrl(id: id)
         Task {
             do {
                 output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .delete)
-                guard let (revision, _) = parseSingleItem(data: data) else { return }
-                RequestProcessor.revision = revision
                 
                 if responseStatusCode == 400 {
                     getCurrentRevision()
+                    output?.loading()
                     deleteItem(id: id)
+                    getCurrentRevision()
                 }
+                guard let (revision, _) = parseSingleItem(data: data) else { return }
+                RequestProcessor.revision = revision
 
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
         }
     }
@@ -135,11 +141,11 @@ extension ToDoItemsModel: ToDoItemsModelInput {
             do {
                 output?.isDirty = false
                 let (data, _) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
-                guard let (revision, _) = parseToDoItems(data: data) else { return }
+                guard let (revision, items) = parseToDoItems(data: data) else { return }
+                output?.didRecieveData(items: items)
                 RequestProcessor.revision = revision
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
         }
     }
@@ -157,11 +163,12 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 guard let (revision, items) = parseToDoItems(data: data) else { return }
                 RequestProcessor.revision = revision
                 output?.didRecieveData(items: items)
+                
+                dataBase.dropTable()
+                dataBase.save(items: items)
             } catch {
-                self.service.readJSON()
-                output?.didRecieveData(items: self.service.collectionOfToDoItems)
+                output?.didRecieveData(items: dataBase.load())
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
         }
     }

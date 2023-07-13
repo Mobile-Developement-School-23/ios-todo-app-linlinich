@@ -14,7 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
         
-        _ = FileCache(collectionOfToDoItems: [])
         coordinator = Coordinator()
         coordinator?.start(navigationController: navigationController)
     }

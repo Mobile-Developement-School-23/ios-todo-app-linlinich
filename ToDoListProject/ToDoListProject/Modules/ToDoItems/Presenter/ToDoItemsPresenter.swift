@@ -57,6 +57,10 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
         model.addingNewItem(item: item)
     }
     
+    func loading() {
+        view?.showLoadingView()
+    }
+    
     func checkIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int) -> Bool {
         if row < toDoItems.count {
             var item: TodoItem
@@ -144,13 +148,6 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
 }
 
 extension ToDoItemsPresenter: ToDoItemsModelOutput {
-    
-    
-    func saveItemsToFile() {
-        let service = FileCache.shared
-        service.collectionOfToDoItems = toDoItems
-        service.writeJSON(items: toDoItems)
-    }
     
     func didRecieveData(items: [TodoItem]) {
         self.toDoItems = items.sorted(by: {$0.dateOfCreation > $1.dateOfCreation})

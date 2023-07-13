@@ -11,6 +11,7 @@ import Foundation
 protocol ToDoItemsViewInput: AnyObject {
     func reload()
     func changeNetworkStatus()
+    func showLoadingView()
 }
 
 // MARK: - ToDoItems ViewOutput
