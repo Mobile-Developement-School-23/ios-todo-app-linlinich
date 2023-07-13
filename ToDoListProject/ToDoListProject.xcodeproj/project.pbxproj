@@ -361,6 +361,7 @@
 				56B970A72A3867EC00D31378 /* Resources */,
 				5621C6632A43549A00B67C52 /* SwiftGen */,
 				56B0ABBE2A4FBB7C00503A9D /* ShellScript */,
+				F69B9F25F91D6B00935E821D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -402,6 +403,7 @@
 				56B970C52A3867EE00D31378 /* Sources */,
 				56B970C62A3867EE00D31378 /* Frameworks */,
 				56B970C72A3867EE00D31378 /* Resources */,
+				C8679D7575715B7B18FC7692 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -590,6 +592,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8679D7575715B7B18FC7692 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject-ToDoListProjectUITests/Pods-ToDoListProject-ToDoListProjectUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject-ToDoListProjectUITests/Pods-ToDoListProject-ToDoListProjectUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject-ToDoListProjectUITests/Pods-ToDoListProject-ToDoListProjectUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F69B9F25F91D6B00935E821D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject/Pods-ToDoListProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject/Pods-ToDoListProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject/Pods-ToDoListProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

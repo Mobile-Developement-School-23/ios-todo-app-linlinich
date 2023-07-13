@@ -11,7 +11,7 @@ protocol ToDoItemsModelInput: AnyObject {
     func loadToDoItems()
     func deleteItem(id: String)
     func editingItem(item: TodoItem)
-    func reloadToDoItems(items: [TodoItem]) -> Bool
+    func reloadToDoItems(items: [TodoItem])
     func addingNewItem(item: TodoItem)
 }
 

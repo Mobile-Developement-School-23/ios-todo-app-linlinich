@@ -15,10 +15,10 @@ final class ToDoItemsModel {
 
 extension ToDoItemsModel: ToDoItemsModelInput {
     
-    func reloadToDoItems(items: [TodoItem]) -> Bool {
+    func reloadToDoItems(items: [TodoItem]) {
         guard let url = try? RequestProcessor.makeUrl() else {
             print("wrong url")
-            return true
+            return
         }
         var array: [Any] = []
         
@@ -32,15 +32,21 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 output?.isDirty = false
                 
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url, method: .patch, body: data)
+                print(responseStatusCode)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
+                
+                if responseStatusCode == 400 {
+                    getCurrentRevision()
+                    reloadToDoItems(items: items)
+                }
+
             } catch {
                 output?.isDirty = true
                 output?.saveItemsToFile()
             }
             
         }
-        return false
     }
     
     func editingItem(item: TodoItem) {
@@ -57,6 +63,13 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .put, body: data)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
+                
+                print(responseStatusCode)
+                if responseStatusCode == 400 {
+                    getCurrentRevision()
+                    editingItem(item: item)
+                }
+
             } catch {
                 output?.isDirty = true
                 output?.saveItemsToFile()
@@ -79,6 +92,12 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .post, body: data)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
+                
+                if responseStatusCode == 400 {
+                    getCurrentRevision()
+                    addingNewItem(item: item)
+                }
+
             } catch {
                 output?.isDirty = true
                 output?.saveItemsToFile()
@@ -97,6 +116,27 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .delete)
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
+                
+                if responseStatusCode == 400 {
+                    getCurrentRevision()
+                    deleteItem(id: id)
+                }
+
+            } catch {
+                output?.isDirty = true
+                output?.saveItemsToFile()
+            }
+        }
+    }
+    
+    func getCurrentRevision() {
+        let url = try? RequestProcessor.makeUrl()
+        Task {
+            do {
+                output?.isDirty = false
+                let (data, _) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
+                guard let (revision, _) = parseToDoItems(data: data) else { return }
+                RequestProcessor.revision = revision
             } catch {
                 output?.isDirty = true
                 output?.saveItemsToFile()
@@ -113,7 +153,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         Task {
             do {
                 output?.isDirty = false
-                let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
+                let (data, _) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
                 guard let (revision, items) = parseToDoItems(data: data) else { return }
                 RequestProcessor.revision = revision
                 output?.didRecieveData(items: items)
