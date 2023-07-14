@@ -18,8 +18,8 @@ struct TodoItemSQL {
     static let lastUpdated = Expression<String>(CodingKeys.lastUpdated.rawValue)
 }
 
-class Database {
-    static let shared = Database()
+class SQLiteManager {
+    static let shared = SQLiteManager()
     public var connection: Connection?
     public var todoitems: Table?
     private init() {
