@@ -61,6 +61,10 @@ extension ToDoItemsPresenter: ToDoItemsViewOutput {
         view?.showLoadingView()
     }
     
+    func endLoading() {
+        view?.hideLoadingView()
+    }
+    
     func checkIsDone(type: ToDoItemsViewController.TypeOfTableView, row: Int) -> Bool {
         if row < toDoItems.count {
             var item: TodoItem

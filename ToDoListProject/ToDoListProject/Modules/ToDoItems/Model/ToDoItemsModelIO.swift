@@ -22,4 +22,5 @@ protocol ToDoItemsModelOutput: AnyObject {
     func reloadToDoItems()
     var isDirty: Bool { get set }
     func loading()
+    func endLoading()
 }

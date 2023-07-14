@@ -1,7 +1,19 @@
 import UIKit
+import CoreData
 import CocoaLumberjackSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "TableDB")
+        container.loadPersistentStores(completionHandler: { (_, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+
 
     public let fileLogger: DDFileLogger = DDFileLogger()
         private func setLogger() {

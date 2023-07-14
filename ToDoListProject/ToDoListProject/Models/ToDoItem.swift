@@ -11,6 +11,7 @@ struct TodoItem {
     let dateOfChange: Date
     let lastUpdated: String
     
+    private var context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
     enum ImportanceOfTask: String {
         case unimportant = "low"
@@ -122,6 +123,58 @@ extension TodoItem {
                         dateOfCreation: dateOfCreation,
                         dateOfChange: dateOfChange,
                         lastUpdated: lastUpdated)
+    }
+    
+    var coreData: Item? {
+        guard let context = context else { return nil}
+        let item = Item(context: context)
+        item.id = id
+        item.text = text
+        item.changed_at = dateOfChange
+        item.created_at = dateOfCreation
+        item.done = didDone
+        item.deadline = deadline
+        item.last_updated_by = lastUpdated
+        item.importance = importance.rawValue
+        
+        return item
+    }
+    
+    static func makeTodoItemFromCoreData(item: Item) -> TodoItem? {
+        let importance: ImportanceOfTask
+        guard
+            let id = item.id,
+            let text = item.text,
+            let lastUpdated = item.last_updated_by,
+            let dateOfCreation = item.created_at,
+            let dateOfChanged = item.changed_at,
+            let importanceCoreData = item.importance
+        else {
+            return nil
+        }
+        if let importanceTry = ImportanceOfTask(rawValue: importanceCoreData) {
+            importance = importanceTry
+        } else {
+            return nil
+        }
+        
+        let deadline: Date?
+        if let deadlineCoreData = item.deadline {
+            deadline = deadlineCoreData
+        } else {
+            deadline = nil
+        }
+        
+        return TodoItem(id: id,
+                        text: text,
+                        importance: importance,
+                        deadline: deadline,
+                        didDone: item.done,
+                        dateOfCreation: dateOfCreation,
+                        dateOfChange: dateOfChanged,
+                        lastUpdated: lastUpdated
+        )
+        
     }
     
     var json: Any {

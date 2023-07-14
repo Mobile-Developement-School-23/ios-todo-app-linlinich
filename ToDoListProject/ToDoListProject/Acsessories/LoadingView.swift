@@ -24,7 +24,7 @@ class LoadingView: UIView {
 
     private let backgroungView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(asset: Asset.Colors.backPrimary)?.withAlphaComponent(0.9)
+        view.backgroundColor = UIColor(asset: Asset.Colors.backPrimary)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

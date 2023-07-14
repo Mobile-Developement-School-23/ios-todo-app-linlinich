@@ -10,7 +10,7 @@ import UIKit
 
 final class ToDoItemsModel {
     var output: ToDoItemsModelOutput?
-    let dataBase = Database.shared
+    let dataBase = CoreDataManager()
 }
 
 extension ToDoItemsModel: ToDoItemsModelInput {
@@ -34,10 +34,11 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url, method: .patch, body: data)
              
                 if responseStatusCode == 400 {
-                    getCurrentRevision()
                     output?.loading()
+                    getCurrentRevision()
                     reloadToDoItems(items: items)
                     getCurrentRevision()
+                    output?.endLoading()
                 }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
@@ -64,10 +65,11 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .put, body: data)
                 
                 if responseStatusCode == 400 {
-                    getCurrentRevision()
                     output?.loading()
+                    getCurrentRevision()
                     editingItem(item: item)
                     getCurrentRevision()
+                    output?.endLoading()
                 }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
@@ -95,10 +97,13 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .post, body: data)
                 
                 if responseStatusCode == 400 {
-                    getCurrentRevision()
+                    print("400")
                     output?.loading()
-                    addingNewItem(item: item)
                     getCurrentRevision()
+                    DispatchQueue.main.async {
+                        self.addingNewItem(item: item)
+                    }
+                    output?.endLoading()
                 }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
@@ -121,10 +126,10 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .delete)
                 
                 if responseStatusCode == 400 {
-                    getCurrentRevision()
                     output?.loading()
-                    deleteItem(id: id)
                     getCurrentRevision()
+                    deleteItem(id: id)
+                    output?.endLoading()
                 }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
@@ -163,11 +168,12 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 guard let (revision, items) = parseToDoItems(data: data) else { return }
                 RequestProcessor.revision = revision
                 output?.didRecieveData(items: items)
-                
+                output?.endLoading()
                 dataBase.dropTable()
                 dataBase.save(items: items)
             } catch {
                 output?.didRecieveData(items: dataBase.load())
+                output?.endLoading()
                 output?.isDirty = true
             }
         }

@@ -3,7 +3,7 @@ import UIKit
 final class ToDoItemsViewController: UIViewController {
     
     var output: ToDoItemsViewOutput?
-    var dataBase = Database.shared
+    var dataBase = SQLiteManager.shared
     
     enum TypeOfTableView {
         case all
@@ -323,8 +323,13 @@ extension ToDoItemsViewController: ToDoItemsViewInput {
     func reload() {
         DispatchQueue.main.async { [self] in
             toDoItemsTableView.reloadData()
-            loadingView.isHidden = true
             self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func hideLoadingView() {
+        DispatchQueue.main.async { [self] in
+            loadingView.isHidden = true
         }
     }
 }

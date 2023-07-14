@@ -12,6 +12,7 @@ protocol ToDoItemsViewInput: AnyObject {
     func reload()
     func changeNetworkStatus()
     func showLoadingView()
+    func hideLoadingView()
 }
 
 // MARK: - ToDoItems ViewOutput
