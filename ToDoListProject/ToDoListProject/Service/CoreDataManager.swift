@@ -10,63 +10,92 @@ import CoreData
 import UIKit
 
 class CoreDataManager {
-    static let shared = CoreDataManager()
-    private var itemsCoreData = [Item]()
-    private var context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
+    // swiftlint:disable all
+
+    private var appDelegate: AppDelegate {
+         UIApplication.shared.delegate as! AppDelegate
+     }
+    // swiftlint:enable all
+
+     private var context: NSManagedObjectContext {
+         appDelegate.persistentContainer.viewContext
+     }
     
-    func incertOrReplace(item: TodoItem) {
-        if let index = itemsCoreData.firstIndex(where: {item.id == $0.id}) {
-            if let item = item.coreData {
-                itemsCoreData[index] = item
-            }
-        } else {
-            if let item = item.coreData {
-                itemsCoreData.append(item)
-            }
+    func replace(item: TodoItem) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", item.id)
+        do {
+            guard let itemsCoreData = try? context.fetch(fetchRequest) as? [Item],
+                  let itemCoreData = itemsCoreData.first else { return }
+            itemCoreData.id = item.id
+            itemCoreData.importance = item.importance.rawValue
+            itemCoreData.changed_at = item.dateOfChange
+            itemCoreData.created_at = item.dateOfCreation
+            itemCoreData.deadline = item.deadline
+            itemCoreData.done = item.didDone
+            itemCoreData.last_updated_by = item.lastUpdated
+            itemCoreData.text = item.text
         }
+        
         saveContext()
     }
     
+    func insert(item: TodoItem) {
+        guard let photoEntityDescription = NSEntityDescription.entity(forEntityName: "Item", in: context) else {
+            return
+        }
+        let itemCoreData = Item(entity: photoEntityDescription, insertInto: context)
+        itemCoreData.id = item.id
+        itemCoreData.importance = item.importance.rawValue
+        itemCoreData.changed_at = item.dateOfChange
+        itemCoreData.created_at = item.dateOfCreation
+        itemCoreData.deadline = item.deadline
+        itemCoreData.done = item.didDone
+        itemCoreData.last_updated_by = item.lastUpdated
+        itemCoreData.text = item.text
+
+        saveContext()
+    }
+    
+        
+    
     func save(items: [TodoItem]) {
         for item in items {
-            incertOrReplace(item: item)
+            insert(item: item)
         }
     }
     
     func delete(id: String) {
-        var index: Int?
-        for identifier in (0..<itemsCoreData.count) where itemsCoreData[identifier].id == id {
-            index = identifier
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        do {
+            guard let items = try? context.fetch(fetchRequest) as? [Item],
+                  let item = items.first else { return}
+            context.delete(item)
         }
-        if let index = index {
-            if let context = context {
-                context.delete(itemsCoreData[index])
-                itemsCoreData.remove(at: index)
-            }
-        }
+        
         saveContext()
     }
     
     func dropTable() {
-        if let context = context {
-            for item in itemsCoreData {
-                context.delete(item)
-            }
-            
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
+        do {
+            let photos = try? context.fetch(fetchRequest) as? [Item]
+            photos?.forEach { context.delete($0) }
         }
+        
+        saveContext()
     }
     
     func load() -> [TodoItem] {
         var collectionsOfToDoItems = [TodoItem]()
         let request: NSFetchRequest<Item> = Item.fetchRequest()
         do {
-            if let context = context {
-                itemsCoreData = try context.fetch(request)
-                for item in itemsCoreData {
-                    if let convertedItem = TodoItem.makeTodoItemFromCoreData(item: item) {
-                        collectionsOfToDoItems.append(convertedItem)
-                    }
+            var itemsCoreData = try context.fetch(request)
+            for item in itemsCoreData {
+                if let convertedItem = TodoItem.makeTodoItemFromCoreData(item: item) {
+                    collectionsOfToDoItems.append(convertedItem)
                 }
             }
         } catch {
@@ -77,9 +106,7 @@ class CoreDataManager {
         
     private func saveContext() {
         do {
-            if let context = context {
                 try context.save()
-            }
         } catch {
             print("Error saving context \(error)")
         }

@@ -4,13 +4,15 @@ import CocoaLumberjackSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    lazy var persistentContainer: NSPersistentCloudKitContainer = {
-        let container = NSPersistentCloudKitContainer(name: "TableDB")
-        container.loadPersistentStores(completionHandler: { (_, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "TableDB")
+        container.loadPersistentStores { description, error in
+            if let error {
+                print(error.localizedDescription)
+            } else {
+                print("DB url -", description.url?.absoluteString)
             }
-        })
+        }
         return container
     }()
 

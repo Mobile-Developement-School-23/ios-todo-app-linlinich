@@ -14,8 +14,8 @@
             filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "editingItem(item:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "editingItem(item:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "editingItem(item:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,10 +62,200 @@
             filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "getCurrentRevision()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B338D325-1721-496E-84C3-9E024E549664"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "editingItem(item:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B772581-9EFA-4F62-8688-295B3E21668C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "editingItem(item:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0B772581-9EFA-4F62-8688-295B3E21668C - 51872e3cb3af220c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ToDoListProject.ToDoItemsModel.editingItem(item: ToDoListProject.TodoItem) -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "1476">
+               </Location>
+               <Location
+                  uuid = "0B772581-9EFA-4F62-8688-295B3E21668C - 44295d2e9e9adc0d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ToDoListProject.ToDoItemsModel.editingItem(item: ToDoListProject.TodoItem) -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  uuid = "0B772581-9EFA-4F62-8688-295B3E21668C - 44295d2e9e9adc0d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ToDoListProject.ToDoItemsModel.editingItem(item: ToDoListProject.TodoItem) -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "392">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "41E3B0AF-F5BB-4F2A-BAC4-BD0306F7D74D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "addingNewItem(item:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B2133A19-AEE0-456F-9737-E403417CE1B6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "reloadToDoItems(items:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "656DFE90-67DC-441E-A91D-BFDC2CA6EFB5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "getCurrentRevision()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "08081A22-A373-4EA1-9243-A98D13C26EBA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "getCurrentRevision()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "08081A22-A373-4EA1-9243-A98D13C26EBA - 40c1c0ebbff322f0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ToDoListProject.ToDoItemsModel.getCurrentRevision() -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "576">
+               </Location>
+               <Location
+                  uuid = "08081A22-A373-4EA1-9243-A98D13C26EBA - 396f51297f8081f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ToDoListProject.ToDoItemsModel.getCurrentRevision() -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "08081A22-A373-4EA1-9243-A98D13C26EBA - 396f51297f8081f1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in ToDoListProject.ToDoItemsModel.getCurrentRevision() -&gt; ()"
+                  moduleName = "ToDoListProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/angelinaresetnikova/Documents/ios-todo-app-linlinich/ToDoListProject/ToDoListProject/Modules/ToDoItems/Model/ToDoItemsModeI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "352">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

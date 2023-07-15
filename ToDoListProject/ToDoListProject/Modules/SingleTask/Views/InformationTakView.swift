@@ -193,7 +193,7 @@ class InformationTaskView: UIView {
         }
     }
     
-    func returnImportance() -> TodoItem.ImportanceOfTask {
+    func returnImportance() -> ImportanceOfTask {
         if importanceSegmentControl.selectedSegmentIndex == 0 {
             return .unimportant
         } else if importanceSegmentControl.selectedSegmentIndex == 1 {
@@ -205,13 +205,13 @@ class InformationTaskView: UIView {
         }
     }
     
-    func setImportance(importanceCheck: TodoItem.ImportanceOfTask) {
+    func setImportance(importanceCheck: ImportanceOfTask) {
         switch importanceCheck {
-        case TodoItem.ImportanceOfTask.unimportant:
+        case ImportanceOfTask.unimportant:
             importanceSegmentControl.selectedSegmentIndex = 0
-        case TodoItem.ImportanceOfTask.usual:
+        case ImportanceOfTask.usual:
             importanceSegmentControl.selectedSegmentIndex = 1
-        case TodoItem.ImportanceOfTask.important:
+        case ImportanceOfTask.important:
             importanceSegmentControl.selectedSegmentIndex = 2
         }
     }

@@ -36,7 +36,9 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 if responseStatusCode == 400 {
                     output?.loading()
                     getCurrentRevision()
-                    reloadToDoItems(items: items)
+                    DispatchQueue.main.async {
+                        self.reloadToDoItems(items: items)
+                    }
                     getCurrentRevision()
                     output?.endLoading()
                 }
@@ -54,7 +56,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
-        dataBase.incertOrReplace(item: item)
+        dataBase.replace(item: item)
         let url = try? RequestProcessor.makeUrl(id: item.id)
         let dict: [String: Any] = ["element": item.json]
 
@@ -67,7 +69,9 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 if responseStatusCode == 400 {
                     output?.loading()
                     getCurrentRevision()
-                    editingItem(item: item)
+                    DispatchQueue.main.async {
+                        self.editingItem(item: item)
+                    }
                     getCurrentRevision()
                     output?.endLoading()
                 }
@@ -86,7 +90,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
-        dataBase.incertOrReplace(item: item)
+        dataBase.insert(item: item)
         print(item)
         let url = try? RequestProcessor.makeUrl()
         let dict: [String: Any] = ["element": item.json]
@@ -128,7 +132,9 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 if responseStatusCode == 400 {
                     output?.loading()
                     getCurrentRevision()
-                    deleteItem(id: id)
+                    DispatchQueue.main.async {
+                        self.deleteItem(id: id)
+                    }
                     output?.endLoading()
                 }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
@@ -169,9 +175,13 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 RequestProcessor.revision = revision
                 output?.didRecieveData(items: items)
                 output?.endLoading()
-                dataBase.dropTable()
-                dataBase.save(items: items)
+                
+                DispatchQueue.main.async {
+                    self.dataBase.dropTable()
+                    self.dataBase.save(items: items)
+                }
             } catch {
+                
                 output?.didRecieveData(items: dataBase.load())
                 output?.endLoading()
                 output?.isDirty = true

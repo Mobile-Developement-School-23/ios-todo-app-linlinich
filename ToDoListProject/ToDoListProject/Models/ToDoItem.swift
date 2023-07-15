@@ -1,6 +1,12 @@
 import Foundation
 import SQLite
 
+enum ImportanceOfTask: String {
+    case unimportant = "low"
+    case usual = "basic"
+    case important = "important"
+}
+
 struct TodoItem {
     let id: String
     let text: String
@@ -11,13 +17,7 @@ struct TodoItem {
     let dateOfChange: Date
     let lastUpdated: String
     
-    private var context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-    
-    enum ImportanceOfTask: String {
-        case unimportant = "low"
-        case usual = "basic"
-        case important = "important"
-    }
+    //private var context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
     init(id: String = UUID().uuidString, text: String, importance: ImportanceOfTask, deadline: Date? = nil, didDone: Bool = false, dateOfCreation: Date = Date(), dateOfChange: Date = Date(), lastUpdated: String) {
         self.id = id
@@ -123,21 +123,6 @@ extension TodoItem {
                         dateOfCreation: dateOfCreation,
                         dateOfChange: dateOfChange,
                         lastUpdated: lastUpdated)
-    }
-    
-    var coreData: Item? {
-        guard let context = context else { return nil}
-        let item = Item(context: context)
-        item.id = id
-        item.text = text
-        item.changed_at = dateOfChange
-        item.created_at = dateOfCreation
-        item.done = didDone
-        item.deadline = deadline
-        item.last_updated_by = lastUpdated
-        item.importance = importance.rawValue
-        
-        return item
     }
     
     static func makeTodoItemFromCoreData(item: Item) -> TodoItem? {

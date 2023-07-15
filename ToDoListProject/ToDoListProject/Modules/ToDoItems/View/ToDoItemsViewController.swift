@@ -3,7 +3,6 @@ import UIKit
 final class ToDoItemsViewController: UIViewController {
     
     var output: ToDoItemsViewOutput?
-    var dataBase = SQLiteManager.shared
     
     enum TypeOfTableView {
         case all
