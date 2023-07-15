@@ -10,7 +10,10 @@ import UIKit
 
 final class ToDoItemsModel {
     var output: ToDoItemsModelOutput?
-    let dataBase = CoreDataManager()
+    let dataBase = CoreDataManager() //let dataBase = SQLiteManager.shared
+    
+    /* Чтобы проверить sqlite поменяйте данную строку за закомментированную и то же самое сделайте в двух случаях ниже
+     */
 }
 
 extension ToDoItemsModel: ToDoItemsModelInput {
@@ -56,7 +59,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
-        dataBase.replace(item: item)
+        dataBase.replace(item: item) // dataBase.incertOrReplace(item: item)
         let url = try? RequestProcessor.makeUrl(id: item.id)
         let dict: [String: Any] = ["element": item.json]
 
@@ -90,7 +93,7 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
-        dataBase.insert(item: item)
+        dataBase.insert(item: item) // dataBase.incertOrReplace(item: item)
         print(item)
         let url = try? RequestProcessor.makeUrl()
         let dict: [String: Any] = ["element": item.json]

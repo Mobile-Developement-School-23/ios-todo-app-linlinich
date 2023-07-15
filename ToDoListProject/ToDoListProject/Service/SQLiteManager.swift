@@ -19,6 +19,7 @@ struct TodoItemSQL {
 }
 
 class SQLiteManager {
+    static let shared = SQLiteManager()
     public var connection: Connection?
     public var todoitems: Table?
     private init() {
