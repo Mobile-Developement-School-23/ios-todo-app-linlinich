@@ -33,6 +33,13 @@ final class ToDoItemsViewController: UIViewController {
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loadingView)
         view.bringSubviewToFront(loadingView)
+        
+    }
+    
+    func showLoadingView() {
+        DispatchQueue.main.async {
+            self.loadingView.isHidden = false
+        }
     }
     
     func setupTableView() {
@@ -260,9 +267,7 @@ extension ToDoItemsViewController: UITableViewDelegate & UITableViewDataSource {
                             message += "\nДедлайн: \(formatter.string(from: deadline))"
                         }
                     }
-                    if let dateOfChange = data.dateOfChange {
-                        message += "\nДата последнего изменения: \(formatter.string(from: dateOfChange))"
-                    }
+                    message += "\nДата последнего изменения: \(formatter.string(from: data.dateOfChange))"
                     self.showAlert(title: "Информация о задаче", message: message)
                 }
                 complitionHand(true)
@@ -317,8 +322,13 @@ extension ToDoItemsViewController: ToDoItemsViewInput {
     func reload() {
         DispatchQueue.main.async { [self] in
             toDoItemsTableView.reloadData()
-            loadingView.isHidden = true
             self.refreshControl.endRefreshing()
+        }
+    }
+    
+    func hideLoadingView() {
+        DispatchQueue.main.async { [self] in
+            loadingView.isHidden = true
         }
     }
 }

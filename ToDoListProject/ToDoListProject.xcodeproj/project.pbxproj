@@ -29,6 +29,9 @@
 		56B970DD2A38ABCE00D31378 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970DC2A38ABCE00D31378 /* ToDoItem.swift */; };
 		56B970DF2A3A102200D31378 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B970DE2A3A102200D31378 /* FileCache.swift */; };
 		56C226592A5CAE9B00F6EEA9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C226582A5CAE9B00F6EEA9 /* LoadingView.swift */; };
+		56C2265C2A60600500F6EEA9 /* TableDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56C2265A2A60600500F6EEA9 /* TableDB.xcdatamodeld */; };
+		56C226622A60623000F6EEA9 /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C226612A60623000F6EEA9 /* SQLiteManager.swift */; };
+		56C226642A60C62D00F6EEA9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C226632A60C62D00F6EEA9 /* CoreDataManager.swift */; };
 		56E7376C2A44FC77005F0623 /* SingleTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7376B2A44FC77005F0623 /* SingleTaskViewController.swift */; };
 		56E7376E2A44FDA9005F0623 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7376D2A44FDA9005F0623 /* Coordinator.swift */; };
 		56E737702A454151005F0623 /* InformationTakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7376F2A454151005F0623 /* InformationTakView.swift */; };
@@ -87,6 +90,9 @@
 		56B970DC2A38ABCE00D31378 /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		56B970DE2A3A102200D31378 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		56C226582A5CAE9B00F6EEA9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		56C2265B2A60600500F6EEA9 /* TableDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TableDB.xcdatamodel; sourceTree = "<group>"; };
+		56C226612A60623000F6EEA9 /* SQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		56C226632A60C62D00F6EEA9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		56E7376B2A44FC77005F0623 /* SingleTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTaskViewController.swift; sourceTree = "<group>"; };
 		56E7376D2A44FDA9005F0623 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		56E7376F2A454151005F0623 /* InformationTakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTakView.swift; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 			children = (
 				56B970AC2A3867EC00D31378 /* AppDelegate.swift */,
 				56B970AE2A3867EC00D31378 /* SceneDelegate.swift */,
+				56C226652A60C64D00F6EEA9 /* Service */,
 				56E737802A4BB2C1005F0623 /* Database */,
 				56B0ABCD2A5717D200503A9D /* Networking */,
 				56E7377C2A4BB21D005F0623 /* Models */,
@@ -227,6 +234,16 @@
 				56C226582A5CAE9B00F6EEA9 /* LoadingView.swift */,
 			);
 			path = Acsessories;
+			sourceTree = "<group>";
+		};
+		56C226652A60C64D00F6EEA9 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				56C226632A60C62D00F6EEA9 /* CoreDataManager.swift */,
+				56C226612A60623000F6EEA9 /* SQLiteManager.swift */,
+				56B970DE2A3A102200D31378 /* FileCache.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		56E737782A4BB1C6005F0623 /* Modules */ = {
@@ -304,7 +321,7 @@
 		56E737802A4BB2C1005F0623 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				56B970DE2A3A102200D31378 /* FileCache.swift */,
+				56C2265A2A60600500F6EEA9 /* TableDB.xcdatamodeld */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -361,6 +378,7 @@
 				56B970A72A3867EC00D31378 /* Resources */,
 				5621C6632A43549A00B67C52 /* SwiftGen */,
 				56B0ABBE2A4FBB7C00503A9D /* ShellScript */,
+				F69B9F25F91D6B00935E821D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -402,6 +420,7 @@
 				56B970C52A3867EE00D31378 /* Sources */,
 				56B970C62A3867EE00D31378 /* Frameworks */,
 				56B970C72A3867EE00D31378 /* Resources */,
+				C8679D7575715B7B18FC7692 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -592,6 +611,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C8679D7575715B7B18FC7692 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject-ToDoListProjectUITests/Pods-ToDoListProject-ToDoListProjectUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject-ToDoListProjectUITests/Pods-ToDoListProject-ToDoListProjectUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject-ToDoListProjectUITests/Pods-ToDoListProject-ToDoListProjectUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F69B9F25F91D6B00935E821D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject/Pods-ToDoListProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject/Pods-ToDoListProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ToDoListProject/Pods-ToDoListProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -599,6 +652,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56C226622A60623000F6EEA9 /* SQLiteManager.swift in Sources */,
 				56E737912A4E3B6A005F0623 /* ToDoItemsBuilder.swift in Sources */,
 				5621C6762A43962500B67C52 /* ToDoItemCell.swift in Sources */,
 				56B970B12A3867EC00D31378 /* ToDoItemsViewController.swift in Sources */,
@@ -606,6 +660,7 @@
 				56E7376E2A44FDA9005F0623 /* Coordinator.swift in Sources */,
 				56E7378C2A4E3AE0005F0623 /* ToDoItemsModeI.swift in Sources */,
 				56B0ABBB2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift in Sources */,
+				56C226642A60C62D00F6EEA9 /* CoreDataManager.swift in Sources */,
 				56E737702A454151005F0623 /* InformationTakView.swift in Sources */,
 				56E737772A4AF199005F0623 /* HeaderViewForMyTasks.swift in Sources */,
 				56E7376C2A44FC77005F0623 /* SingleTaskViewController.swift in Sources */,
@@ -618,6 +673,7 @@
 				56B0ABD12A5901E200503A9D /* NetworkingService.swift in Sources */,
 				5621C6702A437F9000B67C52 /* XCAssets+Generated.swift in Sources */,
 				56B970AF2A3867EC00D31378 /* SceneDelegate.swift in Sources */,
+				56C2265C2A60600500F6EEA9 /* TableDB.xcdatamodeld in Sources */,
 				56E737872A4E3AA1005F0623 /* ToDoItemsViewIO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -980,6 +1036,19 @@
 			productName = CocoaLumberjackSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		56C2265A2A60600500F6EEA9 /* TableDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56C2265B2A60600500F6EEA9 /* TableDB.xcdatamodel */,
+			);
+			currentVersion = 56C2265B2A60600500F6EEA9 /* TableDB.xcdatamodel */;
+			path = TableDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 56B970A12A3867EC00D31378 /* Project object */;
 }

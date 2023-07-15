@@ -11,7 +11,7 @@ protocol ToDoItemsModelInput: AnyObject {
     func loadToDoItems()
     func deleteItem(id: String)
     func editingItem(item: TodoItem)
-    func reloadToDoItems(items: [TodoItem]) -> Bool
+    func reloadToDoItems(items: [TodoItem])
     func addingNewItem(item: TodoItem)
 }
 
@@ -19,7 +19,8 @@ protocol ToDoItemsModelInput: AnyObject {
 
 protocol ToDoItemsModelOutput: AnyObject {
     func didRecieveData(items: [TodoItem])
-    func saveItemsToFile()
     func reloadToDoItems()
     var isDirty: Bool { get set }
+    func loading()
+    func endLoading()
 }

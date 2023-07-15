@@ -10,15 +10,18 @@ import UIKit
 
 final class ToDoItemsModel {
     var output: ToDoItemsModelOutput?
-    private let service = FileCache.shared
+    let dataBase = CoreDataManager() //let dataBase = SQLiteManager.shared
+    
+    /* Чтобы проверить sqlite поменяйте данную строку за закомментированную и то же самое сделайте в двух случаях ниже
+     */
 }
 
 extension ToDoItemsModel: ToDoItemsModelInput {
     
-    func reloadToDoItems(items: [TodoItem]) -> Bool {
+    func reloadToDoItems(items: [TodoItem]) {
         guard let url = try? RequestProcessor.makeUrl() else {
             print("wrong url")
-            return true
+            return
         }
         var array: [Any] = []
         
@@ -32,21 +35,31 @@ extension ToDoItemsModel: ToDoItemsModelInput {
                 output?.isDirty = false
                 
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url, method: .patch, body: data)
+             
+                if responseStatusCode == 400 {
+                    output?.loading()
+                    getCurrentRevision()
+                    DispatchQueue.main.async {
+                        self.reloadToDoItems(items: items)
+                    }
+                    getCurrentRevision()
+                    output?.endLoading()
+                }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
+
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
             
         }
-        return false
     }
     
     func editingItem(item: TodoItem) {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
+        dataBase.replace(item: item) // dataBase.incertOrReplace(item: item)
         let url = try? RequestProcessor.makeUrl(id: item.id)
         let dict: [String: Any] = ["element": item.json]
 
@@ -55,11 +68,22 @@ extension ToDoItemsModel: ToDoItemsModelInput {
             do {
                 output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .put, body: data)
+                
+                if responseStatusCode == 400 {
+                    output?.loading()
+                    getCurrentRevision()
+                    DispatchQueue.main.async {
+                        self.editingItem(item: item)
+                    }
+                    getCurrentRevision()
+                    output?.endLoading()
+                }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
+                
+
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
             
         }
@@ -69,7 +93,8 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
-
+        dataBase.insert(item: item) // dataBase.incertOrReplace(item: item)
+        print(item)
         let url = try? RequestProcessor.makeUrl()
         let dict: [String: Any] = ["element": item.json]
         let data = try? JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted])
@@ -77,11 +102,21 @@ extension ToDoItemsModel: ToDoItemsModelInput {
             do {
                 output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .post, body: data)
+                
+                if responseStatusCode == 400 {
+                    print("400")
+                    output?.loading()
+                    getCurrentRevision()
+                    DispatchQueue.main.async {
+                        self.addingNewItem(item: item)
+                    }
+                    output?.endLoading()
+                }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
                 RequestProcessor.revision = revision
+
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
         }
     }
@@ -90,16 +125,41 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         if output?.isDirty == true {
             output?.reloadToDoItems()
         }
+        dataBase.delete(id: id)
         let url = try? RequestProcessor.makeUrl(id: id)
         Task {
             do {
                 output?.isDirty = false
                 let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .delete)
+                
+                if responseStatusCode == 400 {
+                    output?.loading()
+                    getCurrentRevision()
+                    DispatchQueue.main.async {
+                        self.deleteItem(id: id)
+                    }
+                    output?.endLoading()
+                }
                 guard let (revision, _) = parseSingleItem(data: data) else { return }
+                RequestProcessor.revision = revision
+
+            } catch {
+                output?.isDirty = true
+            }
+        }
+    }
+    
+    func getCurrentRevision() {
+        let url = try? RequestProcessor.makeUrl()
+        Task {
+            do {
+                output?.isDirty = false
+                let (data, _) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
+                guard let (revision, items) = parseToDoItems(data: data) else { return }
+                output?.didRecieveData(items: items)
                 RequestProcessor.revision = revision
             } catch {
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
         }
     }
@@ -113,15 +173,21 @@ extension ToDoItemsModel: ToDoItemsModelInput {
         Task {
             do {
                 output?.isDirty = false
-                let (data, responseStatusCode) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
+                let (data, _) = try await RequestProcessor.requestToTheServer(url: url!, method: .get)
                 guard let (revision, items) = parseToDoItems(data: data) else { return }
                 RequestProcessor.revision = revision
                 output?.didRecieveData(items: items)
+                output?.endLoading()
+                
+                DispatchQueue.main.async {
+                    self.dataBase.dropTable()
+                    self.dataBase.save(items: items)
+                }
             } catch {
-                self.service.readJSON()
-                output?.didRecieveData(items: self.service.collectionOfToDoItems)
+                
+                output?.didRecieveData(items: dataBase.load())
+                output?.endLoading()
                 output?.isDirty = true
-                output?.saveItemsToFile()
             }
         }
     }

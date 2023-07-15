@@ -1,4 +1,11 @@
 import Foundation
+import SQLite
+
+enum ImportanceOfTask: String {
+    case unimportant = "low"
+    case usual = "basic"
+    case important = "important"
+}
 
 struct TodoItem {
     let id: String
@@ -7,24 +14,19 @@ struct TodoItem {
     let deadline: Date?
     var didDone: Bool
     let dateOfCreation: Date
-    let dateOfChange: Date?
+    let dateOfChange: Date
     let lastUpdated: String
     
+    //private var context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
-    enum ImportanceOfTask: String {
-        case unimportant = "low"
-        case usual = "basic"
-        case important = "important"
-    }
-    
-    init(id: String = UUID().uuidString, text: String, importance: ImportanceOfTask, deadline: Date? = nil, didDone: Bool = false, dateOfCreation: Date = Date(), dateOfChange: Date? = nil, lastUpdated: String) {
+    init(id: String = UUID().uuidString, text: String, importance: ImportanceOfTask, deadline: Date? = nil, didDone: Bool = false, dateOfCreation: Date = Date(), dateOfChange: Date = Date(), lastUpdated: String) {
         self.id = id
         self.text = text
         self.importance = importance
         self.deadline = deadline
         self.didDone = didDone
         self.dateOfCreation = dateOfCreation
-        self.dateOfChange = dateOfChange
+        self.dateOfChange = dateOfCreation
         self.lastUpdated = lastUpdated
     }
 }
@@ -48,7 +50,8 @@ extension TodoItem {
             let text = json[CodingKeys.text.rawValue] as? String,
             let didDone = json[CodingKeys.didDone.rawValue] as? Bool,
             let lastUpdated = json[CodingKeys.lastUpdated.rawValue] as? String,
-            let dateOfCreationJson = json[CodingKeys.dateOfCreation.rawValue] as? Int
+            let dateOfCreationJson = json[CodingKeys.dateOfCreation.rawValue] as? Int,
+            let dateOfChangedJson = json[CodingKeys.dateOfChange.rawValue] as? Int
         else {
             return nil
         }
@@ -73,12 +76,7 @@ extension TodoItem {
             deadline = nil
         }
         
-        let dateOfChange: Date?
-        if let dateOfChangeJson = json[CodingKeys.dateOfChange.rawValue] as? Double {
-            dateOfChange = Date(timeIntervalSince1970: dateOfChangeJson)
-        } else {
-            dateOfChange = nil
-        }
+        let dateOfChange = Date(timeIntervalSince1970: TimeInterval(dateOfChangedJson))
         
         return TodoItem(id: id,
                         text: text,
@@ -90,6 +88,80 @@ extension TodoItem {
                         lastUpdated: lastUpdated)
     }
     
+    static func makeTodoItemFromSQL(itemSQL: Row) -> TodoItem? {
+        let id = itemSQL[TodoItemSQL.id]
+        let text = itemSQL[TodoItemSQL.text]
+        let didDone = itemSQL[TodoItemSQL.didDone]
+        let lastUpdated = itemSQL[TodoItemSQL.lastUpdated]
+        let dateOfCreationSql = itemSQL[TodoItemSQL.dateOfCreation]
+        let dateOfChangedSql = itemSQL[TodoItemSQL.dateOfChange]
+        let importanceSQL = itemSQL[TodoItemSQL.importance]
+        
+        let importance: ImportanceOfTask
+        if let importanceTry = ImportanceOfTask(rawValue: importanceSQL) {
+            importance = importanceTry
+        } else {
+            return nil
+        }
+        
+        let dateOfCreation = Date(timeIntervalSince1970: TimeInterval(dateOfCreationSql))
+        
+        let deadline: Date?
+        if let deadlineSql = itemSQL[TodoItemSQL.deadline] {
+            deadline = Date(timeIntervalSince1970: deadlineSql)
+        } else {
+            deadline = nil
+        }
+        
+        let dateOfChange = Date(timeIntervalSince1970: TimeInterval(dateOfChangedSql))
+        
+        return TodoItem(id: id,
+                        text: text,
+                        importance: importance,
+                        deadline: deadline,
+                        didDone: didDone,
+                        dateOfCreation: dateOfCreation,
+                        dateOfChange: dateOfChange,
+                        lastUpdated: lastUpdated)
+    }
+    
+    static func makeTodoItemFromCoreData(item: Item) -> TodoItem? {
+        let importance: ImportanceOfTask
+        guard
+            let id = item.id,
+            let text = item.text,
+            let lastUpdated = item.last_updated_by,
+            let dateOfCreation = item.created_at,
+            let dateOfChanged = item.changed_at,
+            let importanceCoreData = item.importance
+        else {
+            return nil
+        }
+        if let importanceTry = ImportanceOfTask(rawValue: importanceCoreData) {
+            importance = importanceTry
+        } else {
+            return nil
+        }
+        
+        let deadline: Date?
+        if let deadlineCoreData = item.deadline {
+            deadline = deadlineCoreData
+        } else {
+            deadline = nil
+        }
+        
+        return TodoItem(id: id,
+                        text: text,
+                        importance: importance,
+                        deadline: deadline,
+                        didDone: item.done,
+                        dateOfCreation: dateOfCreation,
+                        dateOfChange: dateOfChanged,
+                        lastUpdated: lastUpdated
+        )
+        
+    }
+    
     var json: Any {
         
         var json: [String: Any] = [
@@ -98,15 +170,12 @@ extension TodoItem {
             CodingKeys.didDone.rawValue: didDone,
             CodingKeys.dateOfCreation.rawValue: Int(dateOfCreation.timeIntervalSince1970),
             CodingKeys.lastUpdated.rawValue: lastUpdated,
-            CodingKeys.importance.rawValue: importance.rawValue
+            CodingKeys.importance.rawValue: importance.rawValue,
+            CodingKeys.dateOfChange.rawValue: Int(dateOfChange.timeIntervalSince1970)
         ]
         
         if let deadline = deadline {
             json[CodingKeys.deadline.rawValue] = Int(deadline.timeIntervalSince1970)
-        }
-        
-        if let dateOfChange = dateOfChange {
-            json[CodingKeys.dateOfChange.rawValue] = Int(dateOfChange.timeIntervalSince1970)
         }
         
         

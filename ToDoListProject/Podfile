@@ -7,6 +7,7 @@ target 'ToDoListProject' do
 
   pod 'SwiftGen'
   pod 'SwiftLint'
+  pod 'SQLite.swift', '~> 0.14.0'
 
   # Pods for ToDoListProject
 

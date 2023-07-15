@@ -1,7 +1,21 @@
 import UIKit
+import CoreData
 import CocoaLumberjackSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "TableDB")
+        container.loadPersistentStores { description, error in
+            if let error {
+                print(error.localizedDescription)
+            } else {
+                print("DB url -", description.url?.absoluteString)
+            }
+        }
+        return container
+    }()
+
 
     public let fileLogger: DDFileLogger = DDFileLogger()
         private func setLogger() {

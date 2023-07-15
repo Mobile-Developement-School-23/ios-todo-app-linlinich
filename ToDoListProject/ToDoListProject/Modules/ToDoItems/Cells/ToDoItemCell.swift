@@ -138,7 +138,7 @@ class ToDoItemCell: UITableViewCell {
         } else {
         }
         
-        if data.importance == TodoItem.ImportanceOfTask.important || data.importance == TodoItem.ImportanceOfTask.unimportant {
+        if data.importance == ImportanceOfTask.important || data.importance == ImportanceOfTask.unimportant {
             
             let symbolImage: UIImage
             switch data.importance {
