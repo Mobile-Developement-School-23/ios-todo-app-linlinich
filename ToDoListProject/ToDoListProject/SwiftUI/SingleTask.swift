@@ -10,6 +10,7 @@ import SwiftUI
 
 
 struct SingleTask: View {
+    
     @State var taskText: String = ""
     @State var importance = 0
     @State private var segmentOptions = [
@@ -22,9 +23,32 @@ struct SingleTask: View {
             .withTintColor(UIColor(asset: Asset.Colors.gray) ?? .gray,
                            renderingMode: .alwaysOriginal) ?? UIImage())
     ]
-    @State var showDeadline = true
-    @State private var showCalendar = true
+    @State var showDeadline = false
+    @State private var showCalendar = false
     @State private var deadline = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? .now
+    
+    var todoItem: TodoItem
+    init(todoItem: TodoItem?) {
+        self.todoItem = todoItem!
+        if let todoItem = todoItem {
+            self.taskText = todoItem.text
+            switch todoItem.importance {
+            case .important:
+                importance = 2
+            case .usual:
+                importance = 1
+            case .unimportant:
+                importance = 0
+            }
+            if let deadlineOfItem = todoItem.deadline {
+                deadline = deadlineOfItem
+                showDeadline = true
+            } else {
+                showDeadline = false
+            }
+        }
+    }
+
     
     private var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -33,14 +57,9 @@ struct SingleTask: View {
         return formatter
     }()
     
-    private var arrorDown: Image = {
-        let image = Image.init(systemName: "exclamationmark.2")
-        return image
-    }()
-    
     var separator: some View {
         Rectangle()
-            .frame(height: 0.5)
+            .frame(height: 1 / UIScreen.main.scale)
             .foregroundColor(Color.init(uiColor: UIColor(asset: Asset.Colors.separator)!))
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
     }
@@ -168,6 +187,6 @@ struct SingleTask: View {
 struct Content_Previews:
     PreviewProvider {
         static var previews: some View {
-            SingleTask()
+            SingleTask(todoItem: TodoItem(text: "kdk", importance: .important, deadline: .now, didDone: false, lastUpdated: "kkd"))
         }
 }

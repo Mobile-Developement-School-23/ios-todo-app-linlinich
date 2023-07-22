@@ -13,6 +13,7 @@
 		5621C6702A437F9000B67C52 /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621C66F2A437F9000B67C52 /* XCAssets+Generated.swift */; };
 		5621C6722A43885700B67C52 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5621C6712A43885700B67C52 /* Images.xcassets */; };
 		5621C6762A43962500B67C52 /* ToDoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621C6752A43962500B67C52 /* ToDoItemCell.swift */; };
+		56618E322A63EBBE00F7CCB1 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56618E312A63EBBE00F7CCB1 /* TableCell.swift */; };
 		56B0ABBB2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B0ABBA2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift */; };
 		56B0ABC02A4FC45D00503A9D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 56B0ABBF2A4FC45D00503A9D /* .swiftlint.yml */; };
 		56B0ABC32A4FD07400503A9D /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 56B0ABC22A4FD07400503A9D /* CocoaLumberjack */; };
@@ -42,6 +43,7 @@
 		56E7378C2A4E3AE0005F0623 /* ToDoItemsModeI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7378B2A4E3AE0005F0623 /* ToDoItemsModeI.swift */; };
 		56E7378E2A4E3B14005F0623 /* ToDoItemsModelIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E7378D2A4E3B14005F0623 /* ToDoItemsModelIO.swift */; };
 		56E737912A4E3B6A005F0623 /* ToDoItemsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E737902A4E3B6A005F0623 /* ToDoItemsBuilder.swift */; };
+		56E864E82A69F9410059C3CF /* TableToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E864E72A69F9410059C3CF /* TableToDoItem.swift */; };
 		958F8CA89C109D880022D77A /* Pods_ToDoListProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 263F9185F7412535FFD4379A /* Pods_ToDoListProject.framework */; };
 		BD550A6E9680A3A6BCC8E0EA /* Pods_ToDoListProject_ToDoListProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5134FA97160516AB1219877 /* Pods_ToDoListProject_ToDoListProjectUITests.framework */; };
 /* End PBXBuildFile section */
@@ -73,6 +75,7 @@
 		5621C66F2A437F9000B67C52 /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		5621C6712A43885700B67C52 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../../../.Trash/Images.xcassets; sourceTree = "<group>"; };
 		5621C6752A43962500B67C52 /* ToDoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemCell.swift; sourceTree = "<group>"; };
+		56618E312A63EBBE00F7CCB1 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		56B0ABBA2A4E3D3A00503A9D /* ToDoItemsModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemsModuleIO.swift; sourceTree = "<group>"; };
 		56B0ABBF2A4FC45D00503A9D /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		56B0ABCE2A5717FA00503A9D /* BaseNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworking.swift; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 		56E7378B2A4E3AE0005F0623 /* ToDoItemsModeI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemsModeI.swift; sourceTree = "<group>"; };
 		56E7378D2A4E3B14005F0623 /* ToDoItemsModelIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemsModelIO.swift; sourceTree = "<group>"; };
 		56E737902A4E3B6A005F0623 /* ToDoItemsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemsBuilder.swift; sourceTree = "<group>"; };
+		56E864E72A69F9410059C3CF /* TableToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableToDoItem.swift; sourceTree = "<group>"; };
 		5C9C67FDF78E7F4F5F5EA80D /* Pods-ToDoListProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoListProject.debug.xcconfig"; path = "Target Support Files/Pods-ToDoListProject/Pods-ToDoListProject.debug.xcconfig"; sourceTree = "<group>"; };
 		9124A8793EA6992A75D72D7B /* Pods-ToDoListProject-ToDoListProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoListProject-ToDoListProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-ToDoListProject-ToDoListProjectUITests/Pods-ToDoListProject-ToDoListProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D48A803B4B128B232E73A8F5 /* Pods_ToDoListProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDoListProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,6 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				56C226672A634F0300F6EEA9 /* SingleTask.swift */,
+				56618E312A63EBBE00F7CCB1 /* TableCell.swift */,
+				56E864E72A69F9410059C3CF /* TableToDoItem.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -678,6 +684,7 @@
 				56E7376C2A44FC77005F0623 /* SingleTaskViewController.swift in Sources */,
 				56B0ABCF2A5717FA00503A9D /* BaseNetworking.swift in Sources */,
 				56B970AD2A3867EC00D31378 /* AppDelegate.swift in Sources */,
+				56618E322A63EBBE00F7CCB1 /* TableCell.swift in Sources */,
 				56E7378E2A4E3B14005F0623 /* ToDoItemsModelIO.swift in Sources */,
 				56C226592A5CAE9B00F6EEA9 /* LoadingView.swift in Sources */,
 				56B970DD2A38ABCE00D31378 /* ToDoItem.swift in Sources */,
@@ -685,6 +692,7 @@
 				56B0ABD12A5901E200503A9D /* NetworkingService.swift in Sources */,
 				5621C6702A437F9000B67C52 /* XCAssets+Generated.swift in Sources */,
 				56B970AF2A3867EC00D31378 /* SceneDelegate.swift in Sources */,
+				56E864E82A69F9410059C3CF /* TableToDoItem.swift in Sources */,
 				56C2265C2A60600500F6EEA9 /* TableDB.xcdatamodeld in Sources */,
 				56E737872A4E3AA1005F0623 /* ToDoItemsViewIO.swift in Sources */,
 			);
